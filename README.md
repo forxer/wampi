@@ -1,4 +1,4 @@
 myTinyLocalHost
 ===============
 
-Convenient replacement for the default Wampserver index.php
+Convenient replacement for the default index.php of Wampserver
