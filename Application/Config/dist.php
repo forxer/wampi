@@ -20,6 +20,9 @@ return [
 	# Wampserver www directory path
 	'wampserver.www.dir' => 'c:\wamp\www',
 
+	# The application name
+	'app.name' => 'myTinyLocalHost',
+
 	# The application identifier (used internally)
 	'app_id' => 'myTinyLocalHost',
 

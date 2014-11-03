@@ -27,10 +27,28 @@
 # La page d'accueil du site
 # ----------------------------------------------------------------------
 
-index:
+home:
   path:     /
   defaults: 
-    _controller: 'Index::home'
+    _controller: 'Home::home'
+
+
+# La page d'accueil du site
+# ----------------------------------------------------------------------
+
+configuration:
+  path:     /configuration
+  defaults: 
+    _controller: 'Configuration::form'
+  requirements:
+    _method: GET
+
+configuration_process:
+  path:     /configuration
+  defaults: 
+    _controller: 'Configuration::process'
+  requirements:
+    _method: POST
 
 
 # Utilitaire pour supprimer un éventuel slash de fin

@@ -1,5 +1,5 @@
 
-<?php if ($view['breadcrumb']->getNumItems() > 1) : ?>
+<?php //if ($view['breadcrumb']->getNumItems() > 1) : ?>
 <ul class="breadcrumb">
 <?php foreach ($view['breadcrumb']->getAll() as $breadcrumbItem) : ?>
 	<li<?php if ($breadcrumbItem['isLast']) : ?> class="active"<?php endif ?>>
@@ -11,4 +11,4 @@
 	</li>
 <?php endforeach; ?>
 </ul>
-<?php endif; ?>
+<?php //endif; ?>

@@ -1,11 +1,11 @@
 <?php
 
-$view['titleTag']->add('localhost', true);
+$view['titleTag']->add($app['app.name'], true);
 
-$view['breadcrumb']->add('Accueil', $view['router']->generate('index'), true);
+$view['breadcrumb']->add($view['translator']->trans('Home'), $view['router']->generate('home'), true);
 
 ?><!DOCTYPE html>
-<html lang="fr">
+<html lang="<?php echo $app['session']->getLanguage() ?>">
 <head>
 	<meta charset="utf-8">
 
@@ -35,12 +35,21 @@ $view['breadcrumb']->add('Accueil', $view['router']->generate('index'), true);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo $view['router']->generate('index') ?>">localhost</a>
+					<a class="navbar-brand" href="<?php echo $view['router']->generate('home') ?>"><?php echo $app['app.name'] ?></a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="main-menu">
+					<ul class="nav navbar-nav">
+						<li<?php if ($app['request']->attributes->get('_route') == 'home') : ?> class="active"<?php endif ?>>
+							<a href="<?php echo $view['router']->generate('home') ?>"><?php
+							echo $view['translator']->trans('Home') ?></a>
+						</li>
+					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo $view['router']->generate('index') ?>" class="active"><?php echo $view['translator']->trans('Home') ?></a></li>
+						<li<?php if ($app['request']->attributes->get('_route') == 'configuration') : ?> class="active"<?php endif ?>>
+							<a href="<?php echo $view['router']->generate('configuration') ?>"><i class="fa fa-cog"></i> <?php
+							echo $view['translator']->trans('Configuration') ?></a>
+						</li>
 						<li class="dropdown">
 
 							<?php foreach ($app['translator.locales'] as $localeCode => $localeTitle) : ?>

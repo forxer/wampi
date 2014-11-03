@@ -26,6 +26,9 @@ class Application extends TaoApplication
 		$this->register(new FinderServiceProvider());
 		$this->register(new TranslatorServiceProvider());
 
+		# Explicitly start session
+		$this['session']->start();
+
 		# Chargement du helper de traduction
 		$this['templating']->set(new TemplatingHelper($this['translator']));
 
