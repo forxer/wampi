@@ -1,11 +1,12 @@
 
 # application cache
 /Application/Storage/Cache/**
-!/Application/Storage/Cache/*/.gitkeep
+!/Application/Storage/Cache/.gitkeep
+!/Application/Storage/Cache/Minify/.gitkeep
 
 # application logs
 /Application/Storage/Logs/**
-!/Application/Storage/Logs/*/.gitkeep
+!/Application/Storage/Logs/.gitkeep
 
 # Bower components
 /www/Components/**
