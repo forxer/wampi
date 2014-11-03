@@ -1,0 +1,19 @@
+
+body {
+	padding-top: 70px;
+}
+
+/* Debug panel */
+#debug-panel {
+	margin-top: 20px;
+}
+#debug-panel .panel-title a i:before {
+	content: "\f078";
+}
+#debug-panel .panel-title a.collapsed i:before {
+	content: "\f054";
+}
+#debug-panel .panel-title a:hover,
+#debug-panel .panel-title a:focus {
+	text-decoration: none;
+}

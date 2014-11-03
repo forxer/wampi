@@ -1,0 +1,13 @@
+{
+	"name": "Kalaho",
+	"dependencies": {
+		"bootstrap" : 				"3.2.*",
+		"fontawesome" :				"4.*",
+		"holderjs" : 				"2.4.*",
+		"html5shiv" : 				"3.7.*",
+		"jquery" : 					"1.*",
+		"jquery-cookie" : 			"1.*",
+		"normalize-css" : 			"2.*",
+		"respond" :					"1.4.*"
+	}
+}

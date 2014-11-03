@@ -1,0 +1,45 @@
+# ----------------------------------------------------------------------
+# Fichier de définition des routes de l'application.
+# ----------------------------------------------------------------------
+# 
+# Exemple de définition d'une route basique :
+#
+# identifiant_de_la_route:
+#   path: /url-de-la-route
+#   defaults: 
+#     _controller: 'Controler::method'
+#
+# Exemple de définition d'une route avec paramètres :
+#
+# identifiant_de_la_route:
+#   path: /chemin-de-route/{page}
+#   defaults: 
+#     _controller: 'Controler::method'
+#     page: 1    
+#   requirements:
+#     page: \d+
+#
+# Pour plus de détail : voir la documentation du composant Symfony utilisé
+# http://symfony.com/fr/doc/current/components/routing/introduction.html#definition-des-routes
+# ----------------------------------------------------------------------
+
+
+# La page d'accueil du site
+# ----------------------------------------------------------------------
+
+index:
+  path:     /
+  defaults: 
+    _controller: 'Index::home'
+
+
+# Utilitaire pour supprimer un éventuel slash de fin
+# ----------------------------------------------------------------------
+
+remove_trailing_slash:
+    path:     /{url}
+    defaults:
+      _controller: 'BaseController::removeTrailingSlash'
+    requirements:
+      url: .*/$
+      _method: GET
