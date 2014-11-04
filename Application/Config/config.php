@@ -1,10 +1,5 @@
 <?php
-/*
- * Customize configuration in this file.
- *
- */
-
-$config = [
+return [
 
 	# Enable/disable debug mode
 	'debug' 				=> true,
@@ -14,8 +9,3 @@ $config = [
 
 ];
 
-
-# DO NOT EDIT BELLOW
-$distConfig = require __DIR__ . '/dist.php';
-
-return $config + $distConfig;

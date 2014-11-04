@@ -2,7 +2,7 @@
 
 $view['titleTag']->add($app['app.name'], true);
 
-$view['breadcrumb']->add($view['translator']->trans('Home'), $view['router']->generate('home'), true);
+$view['breadcrumb']->add($app['app.name'], $view['router']->generate('projects'), true);
 
 ?><!DOCTYPE html>
 <html lang="<?php echo $app['session']->getLanguage() ?>">
@@ -35,17 +35,25 @@ $view['breadcrumb']->add($view['translator']->trans('Home'), $view['router']->ge
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo $view['router']->generate('home') ?>"><?php echo $app['app.name'] ?></a>
+					<a class="navbar-brand" href="<?php echo $view['router']->generate('projects') ?>"><?php echo $app['app.name'] ?></a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="main-menu">
 					<ul class="nav navbar-nav">
-						<li<?php if ($app['request']->attributes->get('_route') == 'home') : ?> class="active"<?php endif ?>>
-							<a href="<?php echo $view['router']->generate('home') ?>"><?php
-							echo $view['translator']->trans('Home') ?></a>
+						<li<?php if (in_array($app['request']->attributes->get('_route'), ['projects','project'])) : ?> class="active"<?php endif ?>>
+							<a href="<?php echo $view['router']->generate('projects') ?>"><?php
+							echo $view['translator']->trans('Projects') ?></a>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> <?php
+							echo $view['translator']->trans('Tools') ?> <span class="caret"></span></a>
+
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="">PhpMyAdmin</a></li>
+							</ul>
+						</li>
 						<li<?php if ($app['request']->attributes->get('_route') == 'configuration') : ?> class="active"<?php endif ?>>
 							<a href="<?php echo $view['router']->generate('configuration') ?>"><i class="fa fa-cog"></i> <?php
 							echo $view['translator']->trans('Configuration') ?></a>
@@ -53,15 +61,14 @@ $view['breadcrumb']->add($view['translator']->trans('Home'), $view['router']->ge
 						<li class="dropdown">
 
 							<?php foreach ($app['translator.locales'] as $localeCode => $localeTitle) : ?>
-							<?php if ($localeCode == $app['session']->getLanguage()) : ?>
+							<?php if ($localeCode === $app['session']->getLanguage()) : ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $localeTitle ?> <span class="caret"></span></a>
 							<?php endif ?>
 							<?php endforeach ?>
 
-
 							<ul class="dropdown-menu" role="menu">
 								<?php foreach ($app['translator.locales'] as $localeCode => $localeTitle) : ?>
-								<?php if ($localeCode != $app['session']->getLanguage()) : ?>
+								<?php if ($localeCode !== $app['session']->getLanguage()) : ?>
 								<li><a href="<?php echo $localeCode ?>"><?php echo $localeTitle ?></a></li>
 								<?php endif ?>
 								<?php endforeach ?>

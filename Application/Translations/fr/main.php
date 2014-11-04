@@ -2,7 +2,7 @@
 
 return [
 	'Menu' => 'Menu',
-	'Home' => 'Accueil',
+	'Projects' => 'Projets',
 	'Configuration' => 'Configuration',
 
 	'Save' => 'Enregistrer'

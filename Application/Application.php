@@ -17,9 +17,17 @@ use Tao\Translator\TemplatingHelper;
 
 class Application extends TaoApplication
 {
-	public function __construct($loader, array $config = [], array $classMap = [])
+	public function __construct($loader, array $classMap = [])
 	{
-		parent::__construct($loader, $config, __DIR__, $classMap);
+		$this['configuration'] = function($app) {
+			return new Configuration($app);
+		};
+
+		$this['projects'] = function($app) {
+			return new Projects($app);
+		};
+
+		parent::__construct($loader, $this['configuration']->get(), __DIR__, $classMap);
 
 		# Enregistrement des services additionnels
 		$this->register(new DatabaseServiceProvider());

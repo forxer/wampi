@@ -2,7 +2,7 @@
 
 return [
 	'Menu' => 'Menu',
-	'Home' => 'Home',
+	'Projects' => 'Projects',
 	'Configuration' => 'Configuration',
 
 	'Save' => 'Save'

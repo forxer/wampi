@@ -1,50 +1,34 @@
-# ----------------------------------------------------------------------
-# Fichier de définition des routes de l'application.
-# ----------------------------------------------------------------------
-# 
-# Exemple de définition d'une route basique :
-#
-# identifiant_de_la_route:
-#   path: /url-de-la-route
-#   defaults: 
-#     _controller: 'Controler::method'
-#
-# Exemple de définition d'une route avec paramètres :
-#
-# identifiant_de_la_route:
-#   path: /chemin-de-route/{page}
-#   defaults: 
-#     _controller: 'Controler::method'
-#     page: 1    
-#   requirements:
-#     page: \d+
-#
-# Pour plus de détail : voir la documentation du composant Symfony utilisé
-# http://symfony.com/fr/doc/current/components/routing/introduction.html#definition-des-routes
+
+# La liste des projets
 # ----------------------------------------------------------------------
 
-
-# La page d'accueil du site
-# ----------------------------------------------------------------------
-
-home:
-  path:     /
+projects:
+  path: /
   defaults: 
-    _controller: 'Home::home'
+    _controller: 'Projects::projectsList'
+
+
+# La page d'un projet
+# ----------------------------------------------------------------------
+
+project:
+  path: /project/{id}
+  defaults: 
+    _controller: 'Project::project'
 
 
 # La page d'accueil du site
 # ----------------------------------------------------------------------
 
 configuration:
-  path:     /configuration
+  path: /configuration
   defaults: 
     _controller: 'Configuration::form'
   requirements:
     _method: GET
 
 configuration_process:
-  path:     /configuration
+  path: /configuration
   defaults: 
     _controller: 'Configuration::process'
   requirements:
