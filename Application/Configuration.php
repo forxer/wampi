@@ -12,24 +12,58 @@ class Configuration
 {
 	protected $app;
 
+	protected $customizableFields = [
+		'app_name',
+		'wampserver_www_dir',
+		'debug',
+	];
+
 	private $dist;
 
+	private $custom;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param Application $app
+	 */
 	public function __construct(Application $app)
 	{
 		$this->app = $app;
 	}
 
+	/**
+	 * Return configuration values from distribution and custom files.
+	 *
+	 * @return array
+	 */
 	public function get()
 	{
-		$config = [];
-
-		if (file_exists($this->getConfigFilename())) {
-			$config = require $this->getConfigFilename();
-		}
-
-		return $config + $this->getDist();
+		return $this->getCustom() + $this->getDist();
 	}
 
+	public function getCustomizableFieldsNames()
+	{
+		return $this->customizableFields;
+	}
+
+	public function getCustomizableFieldsFromConfig()
+	{
+		$fields = [];
+
+		foreach ($this->getCustomizableFieldsNames() as $fieldName) {
+			$fields[$fieldName] = isset($this->app[$fieldName]) ? $this->app[$fieldName] : null;
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Validate data for custom configuration.
+	 *
+	 * @param array $newConfig
+	 * @return array Validated data.
+	 */
 	public function validate($newConfig)
 	{
 		$toValidate = $this->getToValidate($newConfig);
@@ -39,7 +73,12 @@ class Configuration
 		return $validated;
 	}
 
-	public function save($newConfig)
+	/**
+	 * Save custom configuration into the configuration file.
+	 *
+	 * @param array $newConfig
+	 */
+	public function save(array $newConfig)
 	{
 		$content =
 		'<?php' .  "\n\n" .
@@ -50,13 +89,13 @@ class Configuration
 	}
 
 	/**
-	 * Return an array of config value to validate.
+	 * Return an array of configuration values to validate.
 	 *
-	 * In fact, return values ​​that are different
-	 * from  the distribution values.
+	 * In fact, return values ​​that are different from the distribution values
+	 * and are not in customizable fields list.
 	 *
 	 * @param array $newConfig
-	 * @return multitype:unknown
+	 * @return array
 	 */
 	private function getToValidate(array $newConfig = [])
 	{
@@ -65,6 +104,10 @@ class Configuration
 		$toValidate = [];
 		foreach ($newConfig as $k => $v)
 		{
+			if (!in_array($k, $this->customizableFields)) {
+				continue;
+			}
+
 			if ($v !== $distConfig[$k]) {
 				$toValidate[$k] = $v;
 			}
@@ -124,7 +167,7 @@ class Configuration
 	}
 
 	/**
-	 * Return the array of the distribution configuration.
+	 * Return the array of the distribution configuration values.
 	 *
 	 * @return array
 	 */
@@ -135,5 +178,24 @@ class Configuration
 		}
 
 		return $this->dist;
+	}
+
+	/**
+	 * Return the array of the custom configuration values.
+	 *
+	 * @return array
+	 */
+	private function getCustom()
+	{
+		if (null === $this->custom)
+		{
+			$this->custom = [];
+
+			if (file_exists($this->getConfigFilename())) {
+				$this->custom = require $this->getConfigFilename();
+			}
+		}
+
+		return $this->custom;
 	}
 }

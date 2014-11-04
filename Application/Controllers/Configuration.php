@@ -10,32 +10,44 @@ namespace Application\Controllers;
 
 class Configuration extends BaseController
 {
+	protected $config;
+
 	public function form()
 	{
-
+		if (null === $this->config) {
+			$this->config = $this->app['configuration']->getCustomizableFieldsFromConfig();
+		}
 
 		return $this->render('Configuration', [
+			'config' => $this->config
 		]);
 	}
 
 	public function process()
 	{
-		$config = [
-			'app_name' => $this->app['request']->request->get('app_name'),
-			'wampserver_www_dir' => $this->app['request']->request->get('wampserver_www_dir'),
-			'debug' => $this->app['request']->request->get('debug'),
-		];
+		# populate an array with request values
+		$newConfig = [];
+		foreach ($this->app['configuration']->getCustomizableFieldsNames() as $fieldName) {
+			$newConfig[$fieldName] =  $this->app['request']->request->get($fieldName);
+		}
 
-		$validated = $this->app['configuration']->validate($config);
+		# validate values
+		$validated = $this->app['configuration']->validate($newConfig);
 
+		# if no value or error on validation, redirect to form
 		if (empty($validated) || $this->app['messages']->hasError())
 		{
+			# populate config values with collected data merged with current values
+			$this->config = $validated + $this->app['configuration']->getCustomizableFieldsFromConfig();
+
+			# return to form view
 			return $this->form();
 		}
 
+		# save custom values, success message and redirect to form
 		$this->app['configuration']->save($validated);
 
-		$this->app['flashMessages']->success('youpi');
+		$this->app['flashMessages']->success($this->app['translator']->trans('config.success'));
 
 		return $this->redirectToRoute('configuration');
 	}

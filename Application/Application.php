@@ -18,6 +18,9 @@ use Tao\Translator\TemplatingHelper;
 
 class Application extends TaoApplication
 {
+	const URL = 'https://github.com/forxer/myTinyLocalHost';
+	const VERSION = 0.1;
+
 	public function __construct($loader, array $classMap = [])
 	{
 		$this['configuration'] = function($app) {

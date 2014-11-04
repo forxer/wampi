@@ -21,11 +21,10 @@ return [
 	'wampserver_www_dir' => 'c:\wamp\www',
 
 	# The application name
-	'app_name' => 'myTinyLocalHost',
+	'app_name' => 'LocalHost',
 
 	# The application identifier (used internally)
 	'app_id' => 'myTinyLocalHost',
-
 
 	# Enable/disable debug mode
 	'debug' => false,

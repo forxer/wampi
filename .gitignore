@@ -1,4 +1,7 @@
 
+# application config
+/Application/Config/config.php
+
 # application cache
 /Application/Storage/Cache/**
 !/Application/Storage/Cache/.gitkeep
