@@ -41,7 +41,12 @@ class Configuration
 
 	public function save($newConfig)
 	{
+		$content =
+		'<?php' .  "\n\n" .
+		'return ' .
+		var_export($newConfig, true) .  ";\n\n";
 
+		$this->app['filesystem']->dumpFile($this->getConfigFilename(), $content);
 	}
 
 	/**
@@ -78,14 +83,27 @@ class Configuration
 	{
 		$validated = [];
 
-		if (!empty($toValidate['app.name']))
-		{
-			$validated['app.name'] = $toValidate['app.name'];
+		if (!empty($toValidate['app_name'])) {
+			$validated['app_name'] = strip_tags($toValidate['app_name']);
 		}
 
-		if (!empty($toValidate['wampserver.www.dir']))
+		if (!empty($toValidate['wampserver_www_dir']))
 		{
-			$validated['wampserver.www.dir'] = $toValidate['wampserver.www.dir'];
+			if (!is_dir($toValidate['wampserver_www_dir']))
+			{
+				$this->app['instantMessages']->error(
+					sprintf($this->app['translator']->trans('error.missing.www'), $toValidate['wampserver_www_dir'])
+				);
+			}
+			elseif (!is_writable($toValidate['wampserver_www_dir']))
+			{
+				$this->app['instantMessages']->error(
+					sprintf($this->app['translator']->trans('error_unwritable_www'), $toValidate['wampserver_www_dir'])
+				);
+			}
+			else {
+				$validated['wampserver_www_dir'] = $toValidate['wampserver_www_dir'];
+			}
 		}
 
 		if (!empty($toValidate['debug'])) {

@@ -23,10 +23,21 @@ class Projects
 	{
 		if (null === $this->list)
 		{
-			$this->list = $this->app['finder']
-				->directories()
-				->in($this->app['wampserver.www.dir'])
-				->depth('== 0');
+			if (!is_dir($this->app['wampserver_www_dir']))
+			{
+				$this->app['persistentMessages']->error(
+					sprintf($this->app['translator']->trans('error.missing.www'), $this->app['wampserver_www_dir'])
+				);
+
+				$this->list = [];
+			}
+			else
+			{
+				$this->list = $this->app['finder']
+					->directories()
+					->in($this->app['wampserver_www_dir'])
+					->depth('== 0');
+			}
 		}
 
 		return $this->list;

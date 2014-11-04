@@ -10,14 +10,14 @@ $view['breadcrumb']->add($view['translator']->trans('Configuration'), $view['rou
 
 <div class="container">
 
-	<form role="form">
+	<form action="<?php echo $view['router']->generate('configuration_process') ?>" method="post" role="form">
 		<div class="form-group">
-			<label for="app.name"><?php echo $view['translator']->trans('config.app.name') ?></label>
-			<?php echo $view['form']->text('app.name', 60, 255, $app['app.name'], 'form-control') ?>
+			<label for="app_name"><?php echo $view['translator']->trans('config.app.name') ?></label>
+			<?php echo $view['form']->text('app_name', 60, 255, $app['app_name'], 'form-control') ?>
 		</div>
 		<div class="form-group">
-			<label for="wampserver.www.dir"><?php echo $view['translator']->trans('config.wampserver.www.dir') ?></label>
-			<?php echo $view['form']->text('wampserver.www.dir', 60, 255, $app['wampserver.www.dir'], 'form-control') ?>
+			<label for="wampserver_www_dir"><?php echo $view['translator']->trans('config.wampserver.www.dir') ?></label>
+			<?php echo $view['form']->text('wampserver_www_dir', 60, 255, $app['wampserver_www_dir'], 'form-control') ?>
 		</div>
 		<div class="checkbox">
 			<label>

@@ -1,6 +1,6 @@
 
 <div class="row">
-	<div class="col-md-6 col-md-offset-3 alert alert-<?php echo $type ?>" role="alert">
+	<div class="col-md-6 col-md-offset-3 alert alert-<?php echo $type ?> alert-dismissible fade in" role="alert">
 		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
 		<?php if (count($messages) > 1) : ?>
 		<ul>

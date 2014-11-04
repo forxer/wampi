@@ -1,8 +1,8 @@
 <?php
 
-$view['titleTag']->add($app['app.name'], true);
+$view['titleTag']->add($app['app_name'], true);
 
-$view['breadcrumb']->add($app['app.name'], $view['router']->generate('projects'), true);
+$view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects'), true);
 
 ?><!DOCTYPE html>
 <html lang="<?php echo $app['session']->getLanguage() ?>">
@@ -35,7 +35,7 @@ $view['breadcrumb']->add($app['app.name'], $view['router']->generate('projects')
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo $view['router']->generate('projects') ?>"><?php echo $app['app.name'] ?></a>
+					<a class="navbar-brand" href="<?php echo $view['router']->generate('projects') ?>"><?php echo $app['app_name'] ?></a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="main-menu">
@@ -51,7 +51,10 @@ $view['breadcrumb']->add($app['app.name'], $view['router']->generate('projects')
 							echo $view['translator']->trans('Tools') ?> <span class="caret"></span></a>
 
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="">PhpMyAdmin</a></li>
+								<li><a href="http://localhost/phpmyadmin/" target="_blank">phpMyAdmin</a></li>
+								<li><a href="http://localhost/sqlbuddy/" target="_blank">SQL Buddy</a></li>
+								<li><a href="http://localhost/phpsysinfo/" target="_blank">phpSysInfo</a></li>
+								<li><a href="http://localhost/webgrind/" target="_blank">webgrind</a></li>
 							</ul>
 						</li>
 						<li<?php if ($app['request']->attributes->get('_route') == 'configuration') : ?> class="active"<?php endif ?>>
@@ -81,19 +84,15 @@ $view['breadcrumb']->add($app['app.name'], $view['router']->generate('projects')
 		<div id="main-breadcrumb" class="container">
 			<?php echo $view->render('Layout/Breadcrumb') ?>
 		</div><!-- #main-breadcrumb -->
-	</header><!-- #main-header -->
 
-	<div id="main-messages">
-	<?php echo $view->render('Common/messages') ?>
-	</div><!-- #main-messages -->
-
-	<section id="content">
-
-		<div id="main-messages">
+		<div id="main-messages" class="container">
 		<?php # Affichage des éventuels messages
 		echo $view->render('Common/messages') ?>
 		</div><!-- #main-messages -->
 
+	</header><!-- #main-header -->
+
+	<section id="content">
 		<?php # Affichage du contenu principal de la page
 		$view['slots']->output('_content') ?>
 

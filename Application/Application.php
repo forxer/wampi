@@ -8,10 +8,11 @@
 
 namespace Application;
 
-use Application\Provider\FinderServiceProvider;
 use Symfony\Component\Templating\Asset\PathPackage;
 use Tao\Application as TaoApplication;
 use Tao\Provider\DatabaseServiceProvider;
+use Tao\Provider\FilesystemServiceProvider;
+use Tao\Provider\FinderServiceProvider;
 use Tao\Provider\TranslatorServiceProvider;
 use Tao\Translator\TemplatingHelper;
 
@@ -31,6 +32,7 @@ class Application extends TaoApplication
 
 		# Enregistrement des services additionnels
 		$this->register(new DatabaseServiceProvider());
+		$this->register(new FilesystemServiceProvider());
 		$this->register(new FinderServiceProvider());
 		$this->register(new TranslatorServiceProvider());
 
