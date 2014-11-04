@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of myTinyLocalHost.
+ * This file is part of wampi.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,8 +18,9 @@ use Tao\Translator\TemplatingHelper;
 
 class Application extends TaoApplication
 {
-	const URL = 'https://github.com/forxer/myTinyLocalHost';
+	const URL = 'https://github.com/forxer/WampIndex';
 	const VERSION = 0.1;
+	const TAO_URL = 'https://github.com/forxer/tao';
 
 	public function __construct($loader, array $classMap = [])
 	{

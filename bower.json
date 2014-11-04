@@ -1,5 +1,5 @@
 {
-	"name": "myTinyLocalHost",
+	"name": "wampi",
 	"dependencies": {
 		"bootstrap" : 				"3.2.*",
 		"fontawesome" :				"4.*",

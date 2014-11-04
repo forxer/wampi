@@ -1,5 +1,5 @@
 {
-	"name" : "forxer/myTinyLocalHost",
+	"name" : "forxer/wampi",
 	"type" : "project",
 	"license" : "MIT",
 	"description" : "Convenient replacement for the default index.php of Wampserver",

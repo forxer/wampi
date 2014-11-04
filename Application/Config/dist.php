@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of myTinyLocalHost.
+ * This file is part of wampi.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,7 +24,7 @@ return [
 	'app_name' => 'LocalHost',
 
 	# The application identifier (used internally)
-	'app_id' => 'myTinyLocalHost',
+	'app_id' => 'wampi',
 
 	# Enable/disable debug mode
 	'debug' => false,
@@ -33,7 +33,7 @@ return [
 	'database.connection' => [
 		'driver' 	=> 'pdo_mysql',
 		'host' 		=> 'localhost',
-		'dbname' 	=> 'myTinyLocalHost',
+		'dbname' 	=> 'wampi',
 		'user' 		=> 'root',
 		'password' 	=> '',
 		'charset' 	=> 'utf8'

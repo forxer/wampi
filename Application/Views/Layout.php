@@ -99,7 +99,7 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 	</section><!-- #content -->
 
 	<footer id="main-footer" class="container text-center">
-		<small><?php echo sprintf($view['translator']->trans('Powered by myTinyLocalHost'), $app::URL, $app::VERSION) ?></small>
+		<small><?php echo sprintf($view['translator']->trans('Powered by wampi built on top of Tao'), $app::URL, $app::VERSION, $app::TAO_URL) ?></small>
 	</footer><!-- #main-footer -->
 
 	<script type="text/javascript" charset="utf8" src="/min/g=js"></script>
