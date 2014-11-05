@@ -23,17 +23,17 @@ $view['breadcrumb']->add($project_id);
 			<?php foreach ($projects_list as $project) : ?>
 				<li class="list-group-item">
 
-					<?php if ($project_id == $project->getFilename()) : ?>
+					<?php if ($project_id == basename($project)) : ?>
 					<i class="fa fa-folder-open"></i>
 					<?php else : ?>
 					<i class="fa fa-folder"></i>
 					<?php endif ?>
 
-					<a href="<?php echo $view['router']->generate('project', ['id' => $project->getFilename()]) ?>">
-						<?php echo $project->getFilename() ?>
+					<a href="<?php echo $view['router']->generate('project', ['id' => basename($project)]) ?>">
+						<?php echo basename($project) ?>
 					</a>
 
-					<?php if ($project_id == $project->getFilename()) : ?>
+					<?php if ($project_id == basename($project)) : ?>
 					<span class="pull-right"><i class="fa fa-chevron-right"></i></span>
 					<?php endif ?>
 				</li>

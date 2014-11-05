@@ -15,8 +15,8 @@ class Configuration
 	protected $customizableFields = [
 		'app_name',
 		'wampserver_dir',
-		'wampserver_www_dir',
-		'debug',
+		'projects_dirs',
+		'debug'
 	];
 
 	private $dist;
@@ -139,7 +139,7 @@ class Configuration
 					sprintf($this->app['translator']->trans('error.missing.www'), $toValidate['wampserver_dir'])
 				);
 			}
-			elseif (!is_writable($toValidate['wampserver_www_dir']))
+			elseif (!is_writable($toValidate['wampserver_dir']))
 			{
 				$this->app['instantMessages']->error(
 					sprintf($this->app['translator']->trans('error_unwritable_www'), $toValidate['wampserver_dir'])
@@ -150,28 +150,35 @@ class Configuration
 			}
 		}
 
-		if (!empty($toValidate['wampserver_www_dir']))
+		if (!empty($toValidate['projects_dirs']))
 		{
-			if (!is_dir($toValidate['wampserver_www_dir']))
+			$validated['projects_dirs'] = [];
+
+			foreach (explode(PATH_SEPARATOR, $toValidate['projects_dirs']) as $dir)
 			{
-				$this->app['instantMessages']->error(
-					sprintf($this->app['translator']->trans('error.missing.www'), $toValidate['wampserver_www_dir'])
-				);
+				$dir = trim($dir);
+
+				if (!is_dir($dir))
+				{
+					$this->app['instantMessages']->error(
+						sprintf($this->app['translator']->trans('error.missing.www'), $dir)
+					);
+				}
+				elseif (!is_writable($dir))
+				{
+					$this->app['instantMessages']->error(
+						sprintf($this->app['translator']->trans('error_unwritable_www'), $dir)
+					);
+				}
+				else {
+					$validated['projects_dirs'][] = $dir;
+				}
 			}
-			elseif (!is_writable($toValidate['wampserver_www_dir']))
-			{
-				$this->app['instantMessages']->error(
-					sprintf($this->app['translator']->trans('error_unwritable_www'), $toValidate['wampserver_www_dir'])
-				);
-			}
-			else {
-				$validated['wampserver_www_dir'] = $toValidate['wampserver_www_dir'];
-			}
+
+			$validated['projects_dirs'] = implode(PATH_SEPARATOR, $validated['projects_dirs']);
 		}
 
-		if (!empty($toValidate['debug'])) {
-			$validated['debug'] = (boolean)$toValidate['debug'];
-		}
+		$validated['debug'] = !empty($toValidate['debug']) ? true : false;
 
 		return $validated;
 	}

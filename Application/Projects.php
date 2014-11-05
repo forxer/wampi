@@ -21,22 +21,36 @@ class Projects
 
 	public function getList()
 	{
+
+		return $this->getListFromDirectories();
+	}
+
+	private function getListFromDirectories()
+	{
 		if (null === $this->list)
 		{
-			if (!is_dir($this->app['wampserver_www_dir']))
-			{
-				$this->app['persistentMessages']->error(
-					sprintf($this->app['translator']->trans('error.missing.www'), $this->app['wampserver_www_dir'])
-				);
+			$this->list = [];
 
-				$this->list = [];
-			}
-			else
+			$finder = $this->app['finder']
+				->directories()
+				->depth('== 0');
+
+			foreach (explode(PATH_SEPARATOR, $this->app['projects_dirs']) as $dir)
 			{
-				$this->list = $this->app['finder']
-					->directories()
-					->in($this->app['wampserver_www_dir'])
-					->depth('== 0');
+				if (!is_dir($dir))
+				{
+					$this->app['persistentMessages']->error(
+						sprintf($this->app['translator']->trans('error.missing.www'), $this->app['projects_dirs'])
+					);
+
+					continue;
+				}
+
+				$finder->in($dir);
+			}
+
+			foreach ($finder as $finded) {
+				$this->list[] = $finded->getRealpath();
 			}
 		}
 

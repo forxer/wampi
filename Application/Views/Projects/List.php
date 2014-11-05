@@ -12,9 +12,10 @@ $view->extend('Layout');
 				<div class="panel-body">
 
 					<i class="fa fa-folder"></i>
-					<a href="<?php echo $view['router']->generate('project', ['id' => $dir->getFilename()]) ?>">
-						<?php echo $dir->getFilename() ?>
-					</a>
+					<a href="<?php echo $view['router']->generate('project', ['id' => basename($dir)]) ?>">
+						<?php echo basename($dir) ?>
+					</a><br>
+					<small class="text-muted"><?php echo $dir ?></small>
 
 				</div>
 			</div>
@@ -22,3 +23,31 @@ $view->extend('Layout');
 		<?php endforeach ?>
 	</div>
 </div>
+
+<?php
+
+
+$db = $app['db'];
+
+/*
+$sql =
+'CREATE TABLE projects(
+	path            TEXT PRIMARY KEY,
+	name            TEXT    NOT NULL,
+	scanned         DATETIME
+);';
+
+$db->query($sql);
+
+
+foreach ($projectsList as $dir)
+{
+	$db->insert('projects', array(
+		'path' => $dir,
+		'name' =>  basename($dir),
+		'scanned' => date('Y-m-d H:i:s')
+	));
+}
+
+*/
+

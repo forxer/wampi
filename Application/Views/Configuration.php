@@ -21,8 +21,9 @@ $view['breadcrumb']->add($view['translator']->trans('Configuration'), $view['rou
 			<?php echo $view['form']->text('wampserver_dir', 60, 255, $config['wampserver_dir'], 'form-control') ?>
 		</div>
 		<div class="form-group">
-			<label for="wampserver_www_dir"><?php echo $view['translator']->trans('config.wampserver.www.dir') ?></label>
-			<?php echo $view['form']->text('wampserver_www_dir', 60, 255, $config['wampserver_www_dir'], 'form-control') ?>
+			<label for="projects_dirs"><?php echo $view['translator']->trans('config.projects.dirs') ?></label>
+			<?php echo $view['form']->textarea('projects_dirs', 60, 2, $config['projects_dirs'], 'form-control') ?>
+			<span class="help-block"><?php echo sprintf($view['translator']->trans('config.projects.dirs.note'), PATH_SEPARATOR) ?></span>
 		</div>
 		<div class="checkbox">
 			<label>
