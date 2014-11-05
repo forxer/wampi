@@ -11,10 +11,9 @@ $view['breadcrumb']->add($view['translator']->trans('Information'), $view['route
 <div class="container">
 	<h1 class="h2"><?php echo $view['translator']->trans('Information') ?></h1>
 
-	<h2 class="h3"><?php echo $view['translator']->trans('infos.versions') ?> <small></small></h2>
-
 	<div class="row">
 		<div class="col-xs-6">
+			<h2 class="h3"><?php echo $view['translator']->trans('infos.versions') ?> <small></small></h2>
 			<ul class="list-group">
 				<li class="list-group-item"><?php echo $view['translator']->trans('infos.php.version') ?>
 				<span class="badge"><?php echo $phpVersion ?></span></li>
@@ -27,7 +26,17 @@ $view['breadcrumb']->add($view['translator']->trans('Information'), $view['route
 			</ul>
 		</div>
 		<div class="col-xs-6">
-
+			<h2 class="h3"><?php echo $view['translator']->trans('infos.docs') ?> <small></small></h2>
+			<div class="list-group">
+				<a class="list-group-item" href="<?php echo $view['translator']->trans('infos.php.doc.url') ?>" target="_blank"><?php
+				echo $view['translator']->trans('infos.php.doc') ?></a>
+				<a class="list-group-item" href="<?php echo $view['translator']->trans('infos.apache.doc.url') ?>" target="_blank"><?php
+				echo $view['translator']->trans('infos.apache.doc') ?></a>
+				<a class="list-group-item" href="<?php echo $view['translator']->trans('infos.mysql.doc.url') ?>" target="_blank"><?php
+				echo $view['translator']->trans('infos.mysql.doc') ?></a>
+				<a class="list-group-item" href="<?php echo $view['translator']->trans('infos.wampserver.doc.url') ?>" target="_blank"><?php
+				echo $view['translator']->trans('infos.wampserver.doc') ?></a>
+			</div>
 		</div>
 	</div>
 
