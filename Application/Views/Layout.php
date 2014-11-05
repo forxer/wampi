@@ -44,6 +44,10 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 							<a href="<?php echo $view['router']->generate('projects') ?>"><?php
 							echo $view['translator']->trans('Projects') ?></a>
 						</li>
+						<li<?php if ($app['request']->attributes->get('_route') == 'information') : ?> class="active"<?php endif ?>>
+							<a href="<?php echo $view['router']->generate('information') ?>"><?php
+							echo $view['translator']->trans('Information') ?></a>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">

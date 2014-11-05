@@ -32,6 +32,10 @@ class Application extends TaoApplication
 			return new Projects($app);
 		};
 
+		$this['informations'] = function($app) {
+			return new Information($app);
+		};
+
 		parent::__construct($loader, $this['configuration']->get(), __DIR__, $classMap);
 
 		# Enregistrement des services additionnels
@@ -54,4 +58,5 @@ class Application extends TaoApplication
 		$this['templating']->get('assets')->addPackage('components',
 			new PathPackage($this['app_url'] . $this['components_url']));
 	}
+
 }

@@ -17,14 +17,17 @@
 
 return [
 
-	# Wampserver www directory path
-	'wampserver_www_dir' => 'c:\wamp\www',
-
 	# The application name
 	'app_name' => 'LocalHost',
 
 	# The application identifier (used internally)
 	'app_id' => 'wampi',
+
+	# Wampserver directory path
+	'wampserver_dir' => 'c:\wamp',
+
+	# Wampserver www directory path
+	'wampserver_www_dir' => 'c:\wamp\www',
 
 	# Enable/disable debug mode
 	'debug' => false,

@@ -14,6 +14,7 @@ class Configuration
 
 	protected $customizableFields = [
 		'app_name',
+		'wampserver_dir',
 		'wampserver_www_dir',
 		'debug',
 	];
@@ -128,6 +129,25 @@ class Configuration
 
 		if (!empty($toValidate['app_name'])) {
 			$validated['app_name'] = strip_tags($toValidate['app_name']);
+		}
+
+		if (!empty($toValidate['wampserver_dir']))
+		{
+			if (!is_dir($toValidate['wampserver_dir']))
+			{
+				$this->app['instantMessages']->error(
+					sprintf($this->app['translator']->trans('error.missing.www'), $toValidate['wampserver_dir'])
+				);
+			}
+			elseif (!is_writable($toValidate['wampserver_www_dir']))
+			{
+				$this->app['instantMessages']->error(
+					sprintf($this->app['translator']->trans('error_unwritable_www'), $toValidate['wampserver_dir'])
+				);
+			}
+			else {
+				$validated['wampserver_dir'] = $toValidate['wampserver_dir'];
+			}
 		}
 
 		if (!empty($toValidate['wampserver_www_dir']))
