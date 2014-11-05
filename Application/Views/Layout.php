@@ -106,7 +106,7 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 		<small><?php echo sprintf($view['translator']->trans('Powered by wampi built on top of Tao'), $app::URL, $app::VERSION, $app::TAO_URL) ?></small>
 	</footer><!-- #main-footer -->
 
-	<script type="text/javascript" charset="utf8" src="/min/g=js"></script>
+	<script type="text/javascript" src="/min/g=js"></script>
 
 	<?php $view['slots']->output('script') ?>
 
