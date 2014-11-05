@@ -1,4 +1,4 @@
 wampi
 ===============
 
-Convenient replacement for the default **Wamp**server **i**ndex.
+Convenient replacement for the default Wampserver index.
