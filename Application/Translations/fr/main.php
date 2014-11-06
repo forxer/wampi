@@ -6,6 +6,7 @@ return [
 	'Information' => 'Informations',
 	'Configuration' => 'Configuration',
 	'Tools' => 'Outils',
+	'Language' => 'Langue',
 
 	'visit' => 'aller voir',
 	'visit %site%' => 'aller voir %site%',

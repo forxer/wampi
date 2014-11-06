@@ -11,5 +11,18 @@ use Tao\Controller\Controller;
 
 class BaseController extends Controller
 {
+	public function language()
+	{
+		$locale = $this->app['request']->attributes->get('locale');
 
+		if (!array_key_exists($locale, $this->app['translator.locales']))
+		{
+			$this->app['flashMessages']->warning('La locale %locale% n’est pas autorisée.');
+		}
+		else {
+			$this->app['session']->setLanguage($locale);
+		}
+
+		return $this->redirectToRoute('projects');
+	}
 }

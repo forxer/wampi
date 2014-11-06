@@ -61,25 +61,21 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 								<li><a href="http://localhost/webgrind/" target="_blank">webgrind</a></li>
 							</ul>
 						</li>
-						<li<?php if ($app['request']->attributes->get('_route') == 'configuration') : ?> class="active"<?php endif ?>>
-							<a href="<?php echo $view['router']->generate('configuration') ?>"><i class="fa fa-cog"></i> <?php
-							echo $view['translator']->trans('Configuration') ?></a>
-						</li>
 						<li class="dropdown">
 
-							<?php foreach ($app['translator.locales'] as $localeCode => $localeTitle) : ?>
-							<?php if ($localeCode === $app['session']->getLanguage()) : ?>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $localeTitle ?> <span class="caret"></span></a>
-							<?php endif ?>
-							<?php endforeach ?>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag"></i> <?php
+							echo $view['translator']->trans('Language') ?> <span class="caret"></span></a>
 
 							<ul class="dropdown-menu" role="menu">
 								<?php foreach ($app['translator.locales'] as $localeCode => $localeTitle) : ?>
-								<?php if ($localeCode !== $app['session']->getLanguage()) : ?>
-								<li><a href="<?php echo $localeCode ?>"><?php echo $localeTitle ?></a></li>
-								<?php endif ?>
+								<li<?php if ($localeCode === $app['session']->getLanguage()) : ?> class="active"<?php endif ?>><a href="<?php
+								echo $view['router']->generate('language', ['locale' => $localeCode]) ?>"><?php echo $localeTitle ?></a></li>
 								<?php endforeach ?>
 							</ul>
+						</li>
+						<li<?php if ($app['request']->attributes->get('_route') == 'configuration') : ?> class="active"<?php endif ?>>
+							<a href="<?php echo $view['router']->generate('configuration') ?>"><i class="fa fa-cog"></i> <?php
+							echo $view['translator']->trans('Configuration') ?></a>
 						</li>
 					</ul>
 				</div><!-- #main-menu -->

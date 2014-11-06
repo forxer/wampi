@@ -49,6 +49,15 @@ configuration_process:
     _method: POST
 
 
+# Changement de langue
+# ----------------------------------------------------------------------
+
+language:
+    path:     /language/{locale}
+    defaults:
+      _controller: 'BaseController::language'
+
+
 # Utilitaire pour supprimer un éventuel slash de fin
 # ----------------------------------------------------------------------
 
