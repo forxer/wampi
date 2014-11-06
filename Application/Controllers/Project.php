@@ -15,7 +15,7 @@ class Project extends BaseController
 
 		return $this->render('Projects/Project', [
 			'project_id' => $projectId,
-			'projects_list' => $this->app['projects']->getList()
+			'projects_list' => $this->app['projects']->getProjects()
 		]);
 	}
 }

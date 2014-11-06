@@ -12,24 +12,51 @@ class Projects
 {
 	protected $app;
 
-	protected $list;
+	protected $projects;
+
+	protected $listFromDirectories;
 
 	public function __construct(Application $app)
 	{
 		$this->app = $app;
 	}
 
-	public function getList()
+	public function getProjects()
 	{
+		if (null == $this->projects)
+		{
+			$projects = $this->getProjectsFromDirectories();
 
-		return $this->getListFromDirectories();
+			usort ($projects , function($a, $b){
+				return strnatcmp($a['lower_name'], $b['lower_name']);
+			});
+
+			$this->projects = array_values($projects);
+		}
+
+		return $this->projects;
 	}
 
-	private function getListFromDirectories()
+	public function getProjectsFirstLetters()
 	{
-		if (null === $this->list)
+		$firstLettersList = [];
+
+		foreach ($this->getProjectsFromDirectories() as $project) {
+			$firstLettersList[] = $project['first_letter'];
+		}
+
+		$firstLettersList = array_unique($firstLettersList);
+
+		natsort($firstLettersList);
+
+		return $firstLettersList;
+	}
+
+	public function getProjectsFromDirectories()
+	{
+		if (null === $this->listFromDirectories)
 		{
-			$this->list = [];
+			$this->listFromDirectories = [];
 
 			$finder = $this->app['finder']
 				->directories()
@@ -49,12 +76,21 @@ class Projects
 				$finder->in($dir);
 			}
 
-			foreach ($finder as $finded) {
-				$this->list[] = $finded->getRealpath();
+			foreach ($finder as $finded)
+			{
+				$name = $finded->getFilename();
+				$lower_name = strtolower($name);
+
+				$this->listFromDirectories[] = [
+					'path' => $finded->getRealpath(),
+					'name' => $name,
+					'lower_name' => $lower_name,
+					'first_letter' => $lower_name[0]
+				];
 			}
 		}
 
-		return $this->list;
+		return $this->listFromDirectories;
 	}
 
 }

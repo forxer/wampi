@@ -8,6 +8,7 @@
 		"jquery" : 					"1.*",
 		"jquery-cookie" : 			"1.*",
 		"jquery-validation" : 		"1.13.*",
+		"mixitup" : 				"2.1.*",
 		"normalize-css" : 			"2.*",
 		"respond" :					"1.4.*"
 	}

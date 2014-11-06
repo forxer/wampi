@@ -4,34 +4,62 @@ $view->extend('Layout');
 
 ?>
 
-
 <?php $view['slots']->start('script') ?>
+<script type="text/javascript" src="<?php echo $view['assets']->getUrl('mixitup/build/jquery.mixitup.min.js', 'components') ?>"></script>
 <script type="text/javascript">
-$('.visit-project').tooltip();
+
+//$('.visit-project').tooltip();
+
+
+$('#projects').mixItUp({
+	selectors: {
+		target: '.project',
+		filter: '.filter-btn',
+		sort: '.sort-btn'
+	},
+	load: {
+		sort: 'order:asc'
+	}
+});
+
 </script>
 <?php $view['slots']->stop() ?>
 
+
 <div class="container">
-	<div class="row">
-		<?php foreach ($projectsList as $dir) : ?>
-		<div class="col-xs-6 col-md-3">
+	<div class="btn-group">
+		<?php foreach ($projectsFirstLetters  as $letter) : ?>
+		<button type="button" class="btn btn-default filter-btn" data-filter=".first-letter-<?php echo $letter ?>"><?php echo strtoupper($letter) ?></button>
+		<?php endforeach ?>
+		<button type="button" class="btn btn-default filter-btn" data-filter="all"><?php echo $view['translator']->trans('All') ?></button>
+	</div>
+	<div class="btn-group">
+		<button type="button" class="btn btn-default sort-btn" data-sort="order:asc"><?php echo $view['translator']->trans('Ascending') ?></button>
+		<button type="button" class="btn btn-default sort-btn" data-sort="order:desc"><?php echo $view['translator']->trans('Descending') ?></button>
+	</div>
+<hr>
+</div>
+<div class="container">
+	<div class="row" id="projects">
+		<?php foreach ($projectsList as $i => $project) : ?>
+		<div class="project first-letter-<?php echo $project['first_letter'] ?> col-xs-6 col-md-3" data-order="<?php echo $i ?>">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 
 					<i class="fa fa-folder"></i>
-					<a href="<?php echo $view['router']->generate('project', ['id' => basename($dir)]) ?>">
-						<?php echo basename($dir) ?>
+					<a href="<?php echo $view['router']->generate('project', ['id' => $project['name']]) ?>">
+						<?php echo $project['name'] ?>
 					</a>
 
-					<a href="" class="pull-right visit-project" target="_blank" data-toggle="tooltip" title="<?php
-					echo $view['translator']->trans('visit %site%', ['%site%' => basename($dir)]) ?>">
+					<a href="#" class="pull-right visit-project" target="_blank" data-toggle="tooltip" title="<?php
+					echo $view['translator']->trans('visit %site%', ['%site%' => $project['name']]) ?>">
 						<i class="fa fa-lg fa-external-link"></i>
 						<span class="sr-only"><?php echo $view['translator']->trans('visit') ?></span>
 					</a>
 				</div>
 				<div class="panel-body">
 
-					<small class="text-muted"><?php echo $dir ?></small>
+					<small class="text-muted"><?php echo $project['path'] ?></small>
 				</div>
 			</div>
 		</div>
@@ -41,10 +69,9 @@ $('.visit-project').tooltip();
 
 <?php
 
-
+/*
 $db = $app['db'];
 
-/*
 $sql =
 'CREATE TABLE projects(
 	path            TEXT PRIMARY KEY,

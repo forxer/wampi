@@ -3,6 +3,10 @@ body {
 	padding-top: 70px;
 }
 
+#projects .project{
+	display: none;
+}
+
 /* Debug panel */
 #debug-panel {
 	margin-top: 20px;

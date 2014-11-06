@@ -13,7 +13,8 @@ class Projects extends BaseController
 	{
 
 		return $this->render('Projects/List', [
-			'projectsList' => $this->app['projects']->getList()
+			'projectsList' => $this->app['projects']->getProjects(),
+			'projectsFirstLetters' => $this->app['projects']->getProjectsFirstLetters(),
 		]);
 	}
 }

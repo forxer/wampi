@@ -1,6 +1,5 @@
 
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo $view['assets']->getUrl('app.css', 'components') ?>"> -->
-<script src="<?php echo $view['assets']->getUrl('jquery-validation/dist/jquery.validate.min.js', 'js') ?>"></script>
+<script src="<?php echo $view['assets']->getUrl('jquery-validation/dist/jquery.validate.min.js', 'components') ?>"></script>
 
 <script type="text/javascript">
 $.validator.setDefaults({
