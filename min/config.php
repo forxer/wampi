@@ -48,7 +48,7 @@ $min_allowDebugFlag = false;
  * For best performance, specify your temp directory here. Otherwise Minify
  * will have to load extra code to guess. Some examples below:
  */
-$min_cachePath = __DIR__ . '/../../Application/Storage/Cache/Minify';
+$min_cachePath = __DIR__ . '/../Application/Storage/Cache/Minify';
 //$min_cachePath = 'c:\\WINDOWS\\Temp';
 //$min_cachePath = '/tmp';
 //$min_cachePath = preg_replace('/^\\d+;/', '', session_save_path());
@@ -183,7 +183,7 @@ $min_uploaderHoursBehind = 0;
  * Path to Minify's lib folder. If you happen to move it, change
  * this accordingly.
  */
-$min_libPath = __DIR__ . '/../../vendor/mrclay/minify/min/lib';
+$min_libPath = __DIR__ . '/../vendor/mrclay/minify/min/lib';
 
 
 // try to disable output_compression (may not have an effect)

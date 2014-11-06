@@ -12,9 +12,8 @@
 !/Application/Storage/Logs/.gitkeep
 
 # Bower components
-/www/Components/**
-!/www/Components/.gitkeep
+/Components/**
+!/Components/.gitkeep
 
 # Composer packages
 /vendor/
-/composer.lock

@@ -5,4 +5,4 @@ $min_customConfigPaths = [
 	'groups' => __DIR__ . '/groupsConfig.php'
 ];
 
-require __DIR__ . '/../../vendor/mrclay/minify/min/index.php';
+require __DIR__ . '/../vendor/mrclay/minify/min/index.php';

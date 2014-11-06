@@ -28,21 +28,23 @@ $('#projects').mixItUp({
 
 <div class="container">
 	<div class="btn-group">
+		<button type="button" class="btn btn-default filter-btn" data-filter="all"><?php echo $view['translator']->trans('All') ?></button>
 		<?php foreach ($projectsFirstLetters  as $letter) : ?>
 		<button type="button" class="btn btn-default filter-btn" data-filter=".first-letter-<?php echo $letter ?>"><?php echo strtoupper($letter) ?></button>
 		<?php endforeach ?>
-		<button type="button" class="btn btn-default filter-btn" data-filter="all"><?php echo $view['translator']->trans('All') ?></button>
 	</div>
 	<div class="btn-group">
-		<button type="button" class="btn btn-default sort-btn" data-sort="order:asc"><?php echo $view['translator']->trans('Ascending') ?></button>
-		<button type="button" class="btn btn-default sort-btn" data-sort="order:desc"><?php echo $view['translator']->trans('Descending') ?></button>
+		<button type="button" class="btn btn-default sort-btn" data-sort="order:asc"><i class="fa fa-sort-alpha-asc"></i>
+		<span class="sr-only"<?php echo $view['translator']->trans('Ascending') ?></span></button>
+		<button type="button" class="btn btn-default sort-btn" data-sort="order:desc"><i class="fa fa-sort-alpha-desc"></i>
+		<span class="sr-only"><?php echo $view['translator']->trans('Descending') ?></span></button>
 	</div>
 <hr>
 </div>
 <div class="container">
 	<div class="row" id="projects">
 		<?php foreach ($projectsList as $i => $project) : ?>
-		<div class="project first-letter-<?php echo $project['first_letter'] ?> col-xs-6 col-md-3" data-order="<?php echo $i ?>">
+		<div class="project first-letter-<?php echo $project['first_letter'] ?> col-xs-6 col-sm-4 col-md-3" data-order="<?php echo $i ?>">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 

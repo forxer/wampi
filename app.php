@@ -7,7 +7,7 @@
  */
 
 # Chargement  de l'autoload de composer
-$loader = require __DIR__ . '/../vendor/autoload.php';
+$loader = require __DIR__ . '/vendor/autoload.php';
 
 # Initialisation de l'application
 $app = new Application\Application($loader);

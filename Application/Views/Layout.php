@@ -12,6 +12,8 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<?php echo $view->render('Layout/Favicon') ?>
+
 	<title><?php echo $view->escape($view['titleTag']->get(' - ')) ?></title>
 
 	<link rel="stylesheet" type="text/css" href="/min/g=css">
@@ -35,7 +37,8 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo $view['router']->generate('projects') ?>"><?php echo $app['app_name'] ?></a>
+					<a class="navbar-brand" href="<?php echo $view['router']->generate('projects') ?>"><i class="fa fa-lg fa-desktop"></i>
+					<?php echo $app['app_name'] ?></a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="main-menu">
