@@ -10,6 +10,7 @@
 		"jquery-validation" : 		"1.13.*",
 		"mixitup" : 				"2.1.*",
 		"normalize-css" : 			"2.*",
-		"respond" :					"1.4.*"
+		"respond" :					"1.4.*",
+		"select2" : 				"3.*"
 	}
 }
