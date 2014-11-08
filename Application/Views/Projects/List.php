@@ -72,21 +72,19 @@ $(document).ready(function() {
 				<div class="panel-heading">
 
 					<i class="fa fa-folder"></i>
-					<a href="<?php echo $view['router']->generate('project', ['id' => $project['name']]) ?>">
-						<?php echo $project['name'] ?>
-					</a>
+						<a href="<?php
+						if (isset($vhosts[$project['path']])) {
+							echo 'http://'.$vhosts[$project['path']];
+						}
+						else {
+							echo 'http://localhost/'.$project['name'];
+						}
+						?>" class="visit-project" target="_blank" data-toggle="tooltip" title="<?php
+							echo $view['translator']->trans('visit %site%', ['%site%' => $project['name']]) ?>">
 
-					<a href="<?php
-					if (isset($vhosts[$project['path']])) {
-						echo 'http://'.$vhosts[$project['path']];
-					}
-					else {
-						echo 'http://localhost/'.$project['name'];
-					}
-					?>" class="pull-right visit-project" target="_blank" data-toggle="tooltip" title="<?php
-						echo $view['translator']->trans('visit %site%', ['%site%' => $project['name']]) ?>">
-						<i class="fa fa-lg fa-external-link"></i>
-						<span class="sr-only"><?php echo $view['translator']->trans('visit') ?></span>
+						<?php echo $project['name'] ?>
+
+						<i class="fa fa-lg fa-external-link pull-right"></i>
 					</a>
 				</div>
 				<div class="panel-body">

@@ -14,8 +14,8 @@ class Project extends BaseController
 		$projectId = $this->app['request']->attributes->get('id');
 
 		return $this->render('Projects/Project', [
-			'project_id' => $projectId,
-			'projects_list' => $this->app['projects']->getProjects()
+			'project_id' => $projectId
+
 		]);
 	}
 }

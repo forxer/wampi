@@ -17,6 +17,6 @@ return [
 	'Search' => 'Search',
 	'Save' => 'Save',
 
-	'Powered by wampi' => 'Powered by <a href="%1$s" target="_blank"><strong>wampi</strong></a> version %2$s',
+	'Powered by wampi' => 'Powered by <a href="%1$s" target="_blank"><strong>wampi</strong></a> %2$s',
 
 ];
