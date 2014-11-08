@@ -18,9 +18,8 @@ use Tao\Translator\TemplatingHelper;
 
 class Application extends TaoApplication
 {
-	const URL = 'https://github.com/forxer/wampi';
 	const VERSION = 0.1;
-	const TAO_URL = 'https://github.com/forxer/tao';
+	const URL = 'https://github.com/forxer/wampi';
 
 	public function __construct($loader, array $classMap = [])
 	{
