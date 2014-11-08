@@ -27,7 +27,7 @@ class Projects
 		{
 			$projects = $this->getProjectsFromDirectories();
 
-			usort ($projects , function($a, $b){
+			usort($projects , function($a, $b){
 				return strnatcmp($a['lower_name'], $b['lower_name']);
 			});
 
@@ -60,7 +60,8 @@ class Projects
 
 			$finder = $this->app['finder']
 				->directories()
-				->depth('== 0');
+				->depth('== 0')
+			;
 
 			foreach (explode(PATH_SEPARATOR, $this->app['projects_dirs']) as $dir)
 			{
@@ -92,5 +93,4 @@ class Projects
 
 		return $this->listFromDirectories;
 	}
-
 }

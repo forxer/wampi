@@ -13,6 +13,7 @@ class Projects extends BaseController
 	{
 
 		return $this->render('Projects/List', [
+			'vhosts' => $this->app['virtualhosts']->getVirtualHosts(),
 			'projectsList' => $this->app['projects']->getProjects(),
 			'projectsFirstLetters' => $this->app['projects']->getProjectsFirstLetters(),
 		]);

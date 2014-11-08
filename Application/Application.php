@@ -36,6 +36,10 @@ class Application extends TaoApplication
 			return new Information($app);
 		};
 
+		$this['virtualhosts'] = function($app) {
+			return new VirtualHosts($app);
+		};
+
 		parent::__construct($loader, $this['configuration']->get(), __DIR__, $classMap);
 
 		# Enregistrement des services additionnels

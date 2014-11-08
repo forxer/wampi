@@ -76,8 +76,15 @@ $(document).ready(function() {
 						<?php echo $project['name'] ?>
 					</a>
 
-					<a href="#" class="pull-right visit-project" target="_blank" data-toggle="tooltip" title="<?php
-					echo $view['translator']->trans('visit %site%', ['%site%' => $project['name']]) ?>">
+					<a href="<?php
+					if (isset($vhosts[$project['path']])) {
+						echo 'http://'.$vhosts[$project['path']];
+					}
+					else {
+						echo 'http://localhost/'.$project['name'];
+					}
+					?>" class="pull-right visit-project" target="_blank" data-toggle="tooltip" title="<?php
+						echo $view['translator']->trans('visit %site%', ['%site%' => $project['name']]) ?>">
 						<i class="fa fa-lg fa-external-link"></i>
 						<span class="sr-only"><?php echo $view['translator']->trans('visit') ?></span>
 					</a>
@@ -91,30 +98,3 @@ $(document).ready(function() {
 		<?php endforeach ?>
 	</div>
 </div>
-
-<?php
-
-/*
-$db = $app['db'];
-
-$sql =
-'CREATE TABLE projects(
-	path            TEXT PRIMARY KEY,
-	name            TEXT    NOT NULL,
-	scanned         DATETIME
-);';
-
-$db->query($sql);
-
-
-foreach ($projectsList as $dir)
-{
-	$db->insert('projects', array(
-		'path' => $dir,
-		'name' =>  basename($dir),
-		'scanned' => date('Y-m-d H:i:s')
-	));
-}
-
-*/
-
