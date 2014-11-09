@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e5a652449dffeda023a48d06df2448e1",
+    "hash": "da23e93c118b27fd037978e3cf542ac8",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -528,7 +528,7 @@
         },
         {
             "name": "forxer/tao",
-            "version": "dev-master",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/forxer/tao.git",
@@ -1469,9 +1469,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "forxer/tao": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.5"
