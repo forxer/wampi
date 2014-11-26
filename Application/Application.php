@@ -18,48 +18,48 @@ use Tao\Translator\TemplatingHelper;
 
 class Application extends TaoApplication
 {
-	const VERSION = '1.0';
-	const URL = 'https://github.com/forxer/wampi';
+    const VERSION = '2.0.0-alpha';
+    const URL = 'https://github.com/forxer/wampi';
 
-	public function __construct($loader, array $classMap = [])
-	{
-		$this['configuration'] = function($app) {
-			return new Configuration($app);
-		};
+    public function __construct($loader, array $classMap = [])
+    {
+        $this['configuration'] = function($app) {
+            return new Configuration($app);
+        };
 
-		$this['projects'] = function($app) {
-			return new Projects($app);
-		};
+        $this['projects'] = function($app) {
+            return new Projects($app);
+        };
 
-		$this['informations'] = function($app) {
-			return new Information($app);
-		};
+        $this['informations'] = function($app) {
+            return new Information($app);
+        };
 
-		$this['virtualhosts'] = function($app) {
-			return new VirtualHosts($app);
-		};
+        $this['virtualhosts'] = function($app) {
+            return new VirtualHosts($app);
+        };
 
-		parent::__construct($loader, $this['configuration']->get(), __DIR__, $classMap);
+        parent::__construct($loader, $this['configuration']->get(), __DIR__, $classMap);
 
-		# Enregistrement des services additionnels
-		$this->register(new DatabaseServiceProvider());
-		$this->register(new FilesystemServiceProvider());
-		$this->register(new FinderServiceProvider());
-		$this->register(new TranslatorServiceProvider());
+        # Enregistrement des services additionnels
+        $this->register(new DatabaseServiceProvider());
+        $this->register(new FilesystemServiceProvider());
+        $this->register(new FinderServiceProvider());
+        $this->register(new TranslatorServiceProvider());
 
-		# Explicitly start session
-		$this['session']->start();
+        # Explicitly start session
+        $this['session']->start();
 
-		# Chargement du helper de traduction
-		$this['templating']->set(new TemplatingHelper($this['translator']));
+        # Chargement du helper de traduction
+        $this['templating']->set(new TemplatingHelper($this['translator']));
 
-		# Définition de deux packages d'assets pour les templates :
-		# /Assets et /Components
-		$this['templating']->get('assets')->addPackage('assets',
-			new PathPackage($this['app_url'] . $this['assets_url']));
+        # Définition de deux packages d'assets pour les templates :
+        # /Assets et /Components
+        $this['templating']->get('assets')->addPackage('assets',
+            new PathPackage($this['app_url'] . $this['assets_url']));
 
-		$this['templating']->get('assets')->addPackage('components',
-			new PathPackage($this['app_url'] . $this['components_url']));
-	}
+        $this['templating']->get('assets')->addPackage('components',
+            new PathPackage($this['app_url'] . $this['components_url']));
+    }
 
 }
