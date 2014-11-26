@@ -17,29 +17,31 @@
 
 return [
 
-	# The application name
-	'app_name' => 'LocalHost',
+    # The application name
+    'app_name' => 'LocalHost',
 
-	# The application identifier (used internally)
-	'app_id' => 'wampi',
+    # The application identifier (used internally)
+    'app_id' => 'wampi',
 
-	# Wampserver directory path
-	'wampserver_dir' => 'c:\wamp',
+    # Wampserver directory path
+    'wampserver_dir' => 'c:\wamp',
 
-	# Projects directories path
-	'projects_dirs' => 'c:\wamp\www',
+    # Projects directories path
+    'projects_dirs' => 'c:\wamp\www',
 
-	# Enable/disable debug mode
-	'debug' => false,
+    # Enable/disable debug mode
+    'debug' => false,
 
-	# Database connexion configuration.
-	'database.connection' => [
-		'driver' 	=> 'pdo_sqlite',
-		//'user' 		=> '',
-		//'password' 	=> '',
-		'path' 	    => __DIR__ . '/../Storage/Database/wampi.db'
-	],
+    # Database connexion configuration.
+    'database.connection' => [
+        'driver' 	=> 'pdo_sqlite',
+        //'user' 		=> '',
+        //'password' 	=> '',
+        'path' 	    => __DIR__ . '/../Storage/Database/wampi.db'
+    ],
 
-	# Controllers namespace name
-	'routing.controllers_namespace' => 'Application\Controllers',
+    # Controllers namespace name
+    'routing.controllers_namespace' => 'Application\Controllers',
+
+    'vhosts_cache_ttl' => 3600
 ];

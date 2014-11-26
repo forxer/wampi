@@ -10,59 +10,79 @@ namespace Application;
 
 class VirtualHosts
 {
-	protected $app;
+    protected $app;
 
-	protected $vhosts;
+    protected $vhosts;
 
-	public function __construct(Application $app)
-	{
-		$this->app = $app;
+    protected $cacheFilename;
 
-		$this->cacheFilename = __DIR__ . '/Storage/Cache/vhost.php';
-	}
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
 
-	public function getVirtualHosts()
-	{
-		if (null === $this->vhosts)
-		{
-			$this->vhosts = [];
+        $this->cacheFilename = __DIR__ . '/Storage/Cache/vhost.php';
+    }
 
-			$finder = $this->app['finder']
-				->files()
-				->in($this->app['wampserver_dir'] . '/vhosts')
-				->name('*.conf')
-				->depth('== 0')
-			;
+    public function getVirtualHosts()
+    {
+        if (null === $this->vhosts)
+        {
+            if (file_exists($this->cacheFilename) && (filemtime($this->cacheFilename) > (time() - $this->app['vhosts_cache_ttl'])))
+            {
+                $this->vhosts = require $this->cacheFilename;
+            }
+            else
+            {
+                $this->vhosts = $this->getVirtualHostsDataFromFiles();
 
-			foreach ($finder as $finded)
-			{
-				$parsed = $this->parseVirtualHostFile($finded);
+                $data = "<?php\n\n" . 'return ' . var_export($this->vhosts, true) . ";\n";
 
-				$this->vhosts[$parsed['DocumentRoot']] = $parsed['ServerName'];
-			}
-		}
+                file_put_contents($this->vhosts, $data, LOCK_EX);
+            }
+        }
 
-		return $this->vhosts;
-	}
+        return $this->vhosts;
+    }
 
-	protected function parseVirtualHostFile($file)
-	{
-		$vhost = [];
+    protected function getVirtualHostsDataFromFiles()
+    {
+        $vhosts = [];
 
-		$lines = file($file->getRealPath());
+        $finder = $this->app['finder']
+            ->files()
+            ->in($this->app['wampserver_dir'] . '/vhosts')
+            ->name('*.conf')
+            ->depth('== 0')
+        ;
 
-		foreach ($lines as $line)
-		{
-			$line = trim($line);
+        foreach ($finder as $finded)
+        {
+            $parsed = $this->parseVirtualHostsFile($finded);
 
-			if (preg_match('/^\s*ServerName(?:\s+(.*?)|)\s*$/', $line, $match)) {
-				$vhost['ServerName'] = $match[1];
-			}
-			elseif (preg_match('/^\s*DocumentRoot(?:\s+"?(.*?)"?|)\s*$/', $line, $match)) {
-				$vhost['DocumentRoot'] = $match[1];
-			}
-		}
+            $vhosts[$parsed['DocumentRoot']] = $parsed['ServerName'];
+        }
 
-		return $vhost;
-	}
+        return $vhosts;
+    }
+
+    protected function parseVirtualHostsFile($file)
+    {
+        $vhost = [];
+
+        $lines = file($file->getRealPath());
+
+        foreach ($lines as $line)
+        {
+            $line = trim($line);
+
+            if (preg_match('/^\s*ServerName(?:\s+(.*?)|)\s*$/', $line, $match)) {
+                $vhost['ServerName'] = $match[1];
+            }
+            elseif (preg_match('/^\s*DocumentRoot(?:\s+"?(.*?)"?|)\s*$/', $line, $match)) {
+                $vhost['DocumentRoot'] = realpath($match[1]);
+            }
+        }
+
+        return $vhost;
+    }
 }
