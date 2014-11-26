@@ -11,7 +11,6 @@ class Projects extends BaseController
 {
 	public function projectsList()
 	{
-
 		return $this->render('Projects/List', [
 			'vhosts' => $this->app['virtualhosts']->getVirtualHosts(),
 			'projectsList' => $this->app['projects']->getProjects(),

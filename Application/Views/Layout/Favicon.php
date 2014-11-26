@@ -1,4 +1,11 @@
-<link rel="shortcut icon" href="/Assets/favicon/favicon.ico">
+<?php
+/*
+ * This file is part of wampi.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+?><link rel="shortcut icon" href="/Assets/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="/Assets/favicon/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="114x114" href="/Assets/favicon/apple-touch-icon-114x114.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/Assets/favicon/apple-touch-icon-72x72.png">

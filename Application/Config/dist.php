@@ -33,12 +33,9 @@ return [
     'debug' => false,
 
     # Database connexion configuration.
-    'database.connection' => [
-        'driver' 	=> 'pdo_sqlite',
-        //'user' 		=> '',
-        //'password' 	=> '',
-        'path' 	    => __DIR__ . '/../Storage/Database/wampi.db'
-    ],
+    'db_host'      => 'localhost',
+    'db_user' 		=> 'root',
+    'db_password' 	=> '',
 
     # Controllers namespace name
     'routing.controllers_namespace' => 'Application\Controllers',

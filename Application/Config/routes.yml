@@ -49,11 +49,27 @@ configuration_process:
     _method: POST
 
 
+# La page d'installation
+# ----------------------------------------------------------------------
+
+installation:
+  path: /install
+  defaults: 
+    _controller: 'Installation::form'
+
+installation_process:
+  path: /install
+  defaults: 
+    _controller: 'Installation::process'
+  requirements:
+    _method: POST
+
+
 # Changement de langue
 # ----------------------------------------------------------------------
 
 language:
-    path:     /language/{locale}
+    path: /language/{locale}
     defaults:
       _controller: 'BaseController::language'
 
