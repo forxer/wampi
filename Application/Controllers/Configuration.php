@@ -29,7 +29,7 @@ class Configuration extends BaseController
         foreach ($this->app['configuration']->getCustomizableFieldsNames() as $fieldName) {
             $newConfig[$fieldName] =  $this->app['request']->request->get($fieldName);
         }
-dd($newConfig);
+
         # validate values
         $validated = $this->app['configuration']->validate($newConfig);
 

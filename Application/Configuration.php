@@ -132,8 +132,10 @@ class Configuration
         $validated = [];
 
         if (!empty($toValidate['app_name'])) {
-            $validated['app_name'] = strip_tags($toValidate['app_name']);
+            $validated['app_name'] = trim(strip_tags($toValidate['app_name']));
         }
+
+        $validated['debug'] = !empty($toValidate['debug']) ? true : false;
 
         if (!empty($toValidate['wampserver_dir']))
         {
@@ -182,7 +184,21 @@ class Configuration
             $validated['projects_dirs'] = implode(PATH_SEPARATOR, $validated['projects_dirs']);
         }
 
-        $validated['debug'] = !empty($toValidate['debug']) ? true : false;
+        if (!empty($toValidate['db_host'])) {
+            $validated['db_host'] = trim(strip_tags($toValidate['db_host']));
+        }
+
+        if (!empty($toValidate['db_name'])) {
+            $validated['db_name'] = trim(strip_tags($toValidate['db_name']));
+        }
+
+        if (!empty($toValidate['db_user'])) {
+            $validated['db_user'] = trim(strip_tags($toValidate['db_user']));
+        }
+
+        if (!empty($toValidate['db_password'])) {
+            $validated['db_password'] = trim(strip_tags($toValidate['db_password']));
+        }
 
         return $validated;
     }
