@@ -107,8 +107,10 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 
     </section><!-- #content -->
 
+    <hr>
+
     <footer id="main-footer" class="container text-center">
-        <small><?php echo sprintf($view['translator']->trans('Powered by wampi'), $app::URL, $app::VERSION) ?></small>
+        <p><small><?php echo sprintf($view['translator']->trans('Powered by wampi'), $app::URL, $app::VERSION) ?></small></p>
     </footer><!-- #main-footer -->
 
     <script type="text/javascript" src="/min/g=js"></script>

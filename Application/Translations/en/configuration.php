@@ -7,13 +7,14 @@
  */
 
 return [
-
     'config.tab.general' => 'General',
     'config.tab.general.title' => 'General configuration',
     'config.tab.paths' => 'Paths',
     'config.tab.paths.title' => 'Path configuration',
     'config.tab.db' => 'Database',
     'config.tab.db.title' => 'Database configuration',
+    'config.tab.version' => 'Version',
+    'config.tab.version.title' => 'Wampi version',
 
     'config.app.name' => 'Application name',
     'config.enable.debug' => 'Enable debug mode',
@@ -26,6 +27,16 @@ return [
     'config.db.host' => 'Host',
     'config.db.user' => 'User',
     'config.db.password' => 'Password',
+
+    'config.your.version' => 'Your version: <em>%release%</em>',
+    'config.your.version.uptodate' => 'Your version is up to date.',
+    'config.your.version.expired' => 'A newer version is available.',
+    'config.download.latest.release' => 'Download the latest release',
+
+    'config.latest.release' => 'Latest published version: <em>%release%</em>',
+    'config.tab.latest.release.zip' => 'Download <a href="%url%">the zip file</a> of this version',
+    'config.tab.latest.release.show.github' => 'Show this version on <a href="%url%">GitHub</a>',
+    'config.latest.release.sources' => 'Download the source code of this version [ <a href="%zip%">zip</a> ] - [ <a href="%tar%">tar.gz</a> ]',
 
     'config.success' => 'The configuration has been successfully updated.'
 ];

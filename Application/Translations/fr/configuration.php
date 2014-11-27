@@ -14,6 +14,8 @@ return [
     'config.tab.paths.title' => 'Configuration des chemins',
     'config.tab.db' => 'Base de données',
     'config.tab.db.title' => 'Configuration de la base de données',
+    'config.tab.version' => 'Version',
+    'config.tab.version.title' => 'Version de Wampi',
 
     'config.app.name' => 'Nom de l’application',
     'config.enable.debug' => 'Activer le mode debug',
@@ -26,6 +28,16 @@ return [
     'config.db.host' => 'Adresse du serveur hôte',
     'config.db.user' => 'Nom d’utilisateur',
     'config.db.password' => 'Mot de passe',
+
+    'config.your.version' => 'Votre version&nbsp;: <em>%release%</em>',
+    'config.your.version.uptodate' => 'Votre version est à jour.',
+    'config.your.version.expired' => 'Une version plus récente est disponible.',
+    'config.download.latest.release' => 'Télécharger la dernière version',
+
+    'config.latest.release' => 'Dernière version publiée&nbsp;: <em>%release%</em>',
+    'config.tab.latest.release.zip' => 'Télécharger <a href="%url%">l’archive zip</a> de cette version',
+    'config.tab.latest.release.show.github' => 'Voir cette version sur <a href="%url%">GitHub</a>',
+    'config.latest.release.sources' => 'Télécharger le code source de cette version [ <a href="%zip%">zip</a> ] - [ <a href="%tar%">tar.gz</a> ]',
 
     'config.success' => 'La configuration a été mise à jour avec succès.'
 ];

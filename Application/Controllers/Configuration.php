@@ -7,6 +7,9 @@
  */
 namespace Application\Controllers;
 
+use Github\Client as GithubClient;
+use Github\HttpClient\CachedHttpClient as GithubCache;
+
 class Configuration extends BaseController
 {
     protected $config;
@@ -17,8 +20,12 @@ class Configuration extends BaseController
             $this->config = $this->app['configuration']->getCustomizableFieldsFromConfig();
         }
 
+        $latestRelease = $this->getLatestRelease();
+
         return $this->render('Configuration', [
-            'config' => $this->config
+            'config' => $this->config,
+            'latestRelease' => $latestRelease,
+            'uptodate' => version_compare($this->app->getVersion(), $latestRelease['tag_name'], '>=')
         ]);
     }
 
@@ -49,5 +56,28 @@ class Configuration extends BaseController
         $this->app['flashMessages']->success($this->app['translator']->trans('config.success'));
 
         return $this->redirectToRoute('configuration');
+    }
+
+    protected function getLatestRelease()
+    {
+        $client = new GithubClient(
+            new GithubCache(['cache_dir' => $this->app->utilities->getApplicationPath() . '/Storage/Cache/Github'])
+        );
+
+        $releases = $client->api('repo')->releases()->all('forxer', 'wampi');
+
+        # remove pre-release
+        foreach ($releases as $k => $v) {
+            if ($v['prerelease']) {
+                unset($releases[$k]);
+            }
+        }
+
+        # sort release by published date
+        usort($releases, function($a, $b){
+            return (strtotime($a['published_at']) > strtotime($b['published_at'])) ? -1 : 1;
+        });
+
+        return $releases[0];
     }
 }

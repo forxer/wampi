@@ -21,8 +21,6 @@ class Application extends TaoApplication
 
     public function __construct($loader, array $classMap = [])
     {
-    //    $app = $this;
-
         $this['configuration'] = function($app) {
             return new Configuration($app);
         };
@@ -60,4 +58,8 @@ class Application extends TaoApplication
             new PathPackage($this['app_url'] . $this['components_url']));
     }
 
+    public function getVersion()
+    {
+        return self::VERSION;
+    }
 }
