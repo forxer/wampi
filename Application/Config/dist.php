@@ -33,7 +33,8 @@ return [
     'debug' => false,
 
     # Database connexion configuration.
-    'db_host'      => 'localhost',
+    'db_host'       => 'localhost',
+    'db_name'       => 'wampi',
     'db_user' 		=> 'root',
     'db_password' 	=> '',
 

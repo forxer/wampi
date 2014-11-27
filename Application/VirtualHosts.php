@@ -37,7 +37,7 @@ class VirtualHosts
 
                 $data = "<?php\n\n" . 'return ' . var_export($this->vhosts, true) . ";\n";
 
-                file_put_contents($this->vhosts, $data, LOCK_EX);
+                file_put_contents($this->cacheFilename, $data, LOCK_EX);
             }
         }
 

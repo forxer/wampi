@@ -57,6 +57,10 @@ $view['breadcrumb']->add($view['translator']->trans('Configuration'), $view['rou
                         <?php echo $view['form']->text('db_host', 60, 255, $config['db_host'], 'form-control') ?></p>
                     </div>
                     <div class="form-group">
+                        <p><label for="db_name"><?php echo $view['translator']->trans('config.db.name') ?></label>
+                        <?php echo $view['form']->text('db_name', 60, 255, $config['db_name'], 'form-control') ?></p>
+                    </div>
+                    <div class="form-group">
                         <p><label for="db_user"><?php echo $view['translator']->trans('config.db.user') ?></label>
                         <?php echo $view['form']->text('db_user', 60, 255, $config['db_user'], 'form-control') ?></p>
                     </div>
