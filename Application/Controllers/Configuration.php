@@ -16,6 +16,11 @@ class Configuration extends BaseController
 
     public function form()
     {
+        # not installed ?
+        if (!file_exists(__DIR__ . '/../Config/installed')) {
+            return $this->redirectToRoute('installation');
+        }
+
         if (null === $this->config) {
             $this->config = $this->app['configuration']->getCustomizableFieldsFromConfig();
         }

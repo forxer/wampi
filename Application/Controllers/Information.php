@@ -9,15 +9,20 @@ namespace Application\Controllers;
 
 class Information extends BaseController
 {
-	public function infos()
-	{
-		return $this->render('Information', [
-			'apacheVersion' => $this->app['informations']->getApacheVersion(),
-			'mysqlVersion' => $this->app['informations']->getMysqlVersion(),
-			'wampserverVersion' => $this->app['informations']->getWampserverVersion(),
-			'phpVersion' => $this->app['informations']->getPhpVersion(),
-			'phpVersion' => $this->app['informations']->getPhpVersion(),
-			'phpExtensions' => $this->app['informations']->getPhpExtensions()
-		]);
-	}
+    public function infos()
+    {
+        # not installed ?
+        if (!file_exists(__DIR__ . '/../Config/installed')) {
+            return $this->redirectToRoute('installation');
+        }
+
+        return $this->render('Information', [
+            'apacheVersion' => $this->app['informations']->getApacheVersion(),
+            'mysqlVersion' => $this->app['informations']->getMysqlVersion(),
+            'wampserverVersion' => $this->app['informations']->getWampserverVersion(),
+            'phpVersion' => $this->app['informations']->getPhpVersion(),
+            'phpVersion' => $this->app['informations']->getPhpVersion(),
+            'phpExtensions' => $this->app['informations']->getPhpExtensions()
+        ]);
+    }
 }

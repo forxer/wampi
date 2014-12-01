@@ -9,13 +9,18 @@ namespace Application\Controllers;
 
 class Project extends BaseController
 {
-	public function project()
-	{
-		$projectId = $this->app['request']->attributes->get('id');
+    public function project()
+    {
+        # not installed ?
+        if (!file_exists(__DIR__ . '/../Config/installed')) {
+            return $this->redirectToRoute('installation');
+        }
 
-		return $this->render('Projects/Project', [
-			'project_id' => $projectId
+        $projectId = $this->app['request']->attributes->get('id');
 
-		]);
-	}
+        return $this->render('Projects/Project', [
+            'project_id' => $projectId
+
+        ]);
+    }
 }
