@@ -24,8 +24,9 @@ return [
     'config.projects.dirs' => 'Directory path where projects are located',
     'config.projects.dirs.note' => 'You can specify multiple paths separated by the %s character',
 
-    'config.db.host' => 'Host',
-    'config.db.user' => 'User',
+    'config.db.host' => 'Address of the host server',
+    'config.db.name' => 'Name of the database',
+    'config.db.user' => 'User name',
     'config.db.password' => 'Password',
 
     'config.your.version' => 'Your version: <em>%release%</em>',

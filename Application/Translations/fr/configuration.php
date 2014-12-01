@@ -7,7 +7,6 @@
  */
 
 return [
-
     'config.tab.general' => 'Générale',
     'config.tab.general.title' => 'Configuration générale',
     'config.tab.paths' => 'Chemins',
@@ -26,6 +25,7 @@ return [
     'config.projects.dirs.note' => 'Vous pouvez indiquer plusieurs chemins en les séparants par le caractère %s',
 
     'config.db.host' => 'Adresse du serveur hôte',
+    'config.db.name' => 'Nom de la base de données',
     'config.db.user' => 'Nom d’utilisateur',
     'config.db.password' => 'Mot de passe',
 
