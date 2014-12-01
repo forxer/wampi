@@ -98,7 +98,8 @@ class Projects
 
                 $this->listFromDirectories[$path] = [
                     'path' => $path,
-                    'name' => $finded->getFilename()
+                    'name' => $finded->getFilename(),
+                    'in_db' => false
                 ];
             }
         }
@@ -117,6 +118,7 @@ class Projects
             foreach ($projects as $project)
             {
                 $project['in_db'] = true;
+
                 $this->listFromDatabase[$project['path']] = $project;
             }
         }

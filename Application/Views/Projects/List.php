@@ -15,7 +15,7 @@ $view->extend('Layout');
 <script type="text/javascript" src="<?php echo $view['assets']->getUrl('select2/select2_locale_' . $app['session']->getLanguage() . '.js', 'components') ?>"></script>
 <script type="text/javascript">
 
-//$('.visit-project').tooltip();
+$('.visit-project').tooltip();
 
 $(document).ready(function() {
     $("#select-project").select2({
@@ -73,32 +73,42 @@ $(document).ready(function() {
 <div class="container">
     <div class="row" id="projects">
         <?php foreach ($projectsList as $i => $project) : ?>
-        <div class="project first-letter-<?php echo $project['first_letter'] ?> col-xs-6 col-sm-4 col-md-3" data-order="<?php echo $i ?>">
+        <div class="project first-letter-<?php echo $project['first_letter'] ?> col-xs-12 col-sm-6 col-md-4 col-lg-3" data-order="<?php echo $i ?>">
             <div class="panel panel-default">
                 <div class="panel-heading">
 
                     <i class="fa fa-folder"></i>
-                        <a href="<?php
-                        if (isset($vhosts[$project['path']])) {
-                            echo 'http://'.$vhosts[$project['path']];
-                        }
-                        else {
-                            echo 'http://localhost/'.$project['name'];
-                        }
-                        ?>" class="visit-project" target="_blank" data-toggle="tooltip" title="<?php
-                            echo $view['translator']->trans('visit %site%', ['%site%' => $project['name']]) ?>">
-
+                    <a href="<?php echo $view['router']->generate('project', ['id' => $project['name']]) ?>">
                         <?php echo $project['name'] ?>
-
-                        <i class="fa fa-lg fa-external-link pull-right"></i>
                     </a>
+
+                    <a href="<?php
+                    if (isset($vhosts[$project['path']])) {
+                        echo 'http://'.$vhosts[$project['path']];
+                    }
+                    else {
+                        echo 'http://localhost/'.$project['name'];
+                    }
+                    ?>" class="pull-right visit-project" target="_blank" data-toggle="tooltip" title="<?php
+                    echo $view['translator']->trans('visit %site%', ['%site%' => $project['name']]) ?>">
+                        <i class="fa fa-lg fa-external-link"></i>
+                        <span class="sr-only"><?php echo $view['translator']->trans('visit') ?></span>
+                    </a>
+
                 </div>
                 <div class="panel-body">
+
+                    <?php if (!$project['in_db']) : ?>
+                    <a href="" class="pull-right">
+                        <i class="fa fa-lg fa-plus-square"></i>
+                    </a>
+                    <?php endif ?>
 
                     <small class="text-muted"><?php echo $project['path'] ?></small>
                 </div>
             </div>
         </div>
+
         <?php endforeach ?>
     </div>
 </div>

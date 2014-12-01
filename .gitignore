@@ -1,6 +1,7 @@
 
 # application config
 /Application/Config/config.php
+/Application/Config/installed
 
 # application cache
 /Application/Storage/Cache/**
