@@ -10,87 +10,117 @@ namespace Application;
 
 class Projects
 {
-	protected $app;
+    protected $app;
 
-	protected $projects;
+    protected $projects;
 
-	protected $listFromDirectories;
+    protected $listFromDirectories;
 
-	public function __construct(Application $app)
-	{
-		$this->app = $app;
-	}
+    protected $listFromDatabase;
 
-	public function getProjects()
-	{
-		if (null == $this->projects)
-		{
-			$projects = $this->getProjectsFromDirectories();
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
 
-			usort($projects , function($a, $b){
-				return strnatcmp($a['lower_name'], $b['lower_name']);
-			});
+    public function getProjects()
+    {
+        if (null == $this->projects)
+        {
+            $filesProjects = $this->getProjectsFromDirectories();
+            $dbProjects = $this->getProjectsFromDatabase();
 
-			$this->projects = array_values($projects);
-		}
+            $projects = $dbProjects + $filesProjects;
 
-		return $this->projects;
-	}
+            foreach ($projects as $path => $project)
+            {
+                $lower_name = strtolower($project['name']);
 
-	public function getProjectsFirstLetters()
-	{
-		$firstLettersList = [];
+                $projects[$path] = [
+                    'lower_name' => $lower_name,
+                    'first_letter' => $lower_name[0]
+                ] + $project;
+            }
 
-		foreach ($this->getProjectsFromDirectories() as $project) {
-			$firstLettersList[] = $project['first_letter'];
-		}
+            usort($projects , function($a, $b){
+                return strnatcmp($a['lower_name'], $b['lower_name']);
+            });
 
-		$firstLettersList = array_unique($firstLettersList);
+            $this->projects = array_values($projects);
+        }
 
-		natsort($firstLettersList);
+        return $this->projects;
+    }
 
-		return $firstLettersList;
-	}
+    public function getProjectsFirstLetters()
+    {
+        $firstLettersList = [];
 
-	public function getProjectsFromDirectories()
-	{
-		if (null === $this->listFromDirectories)
-		{
-			$this->listFromDirectories = [];
+        foreach ($this->getProjects() as $project) {
+            $firstLettersList[] = $project['first_letter'];
+        }
 
-			$finder = $this->app['finder']
-				->directories()
-				->depth('== 0')
-			;
+        $firstLettersList = array_unique($firstLettersList);
 
-			foreach (explode(PATH_SEPARATOR, $this->app['projects_dirs']) as $dir)
-			{
-				if (!is_dir($dir))
-				{
-					$this->app['persistentMessages']->error(
-						sprintf($this->app['translator']->trans('error.missing.www'), $this->app['projects_dirs'])
-					);
+        natsort($firstLettersList);
 
-					continue;
-				}
+        return $firstLettersList;
+    }
 
-				$finder->in($dir);
-			}
+    public function getProjectsFromDirectories()
+    {
+        if (null === $this->listFromDirectories)
+        {
+            $this->listFromDirectories = [];
 
-			foreach ($finder as $finded)
-			{
-				$name = $finded->getFilename();
-				$lower_name = strtolower($name);
+            $finder = $this->app['finder']
+                ->directories()
+                ->depth('== 0')
+            ;
 
-				$this->listFromDirectories[] = [
-					'path' => $finded->getRealpath(),
-					'name' => $name,
-					'lower_name' => $lower_name,
-					'first_letter' => $lower_name[0]
-				];
-			}
-		}
+            foreach (explode(PATH_SEPARATOR, $this->app['projects_dirs']) as $dir)
+            {
+                if (!is_dir($dir))
+                {
+                    $this->app['persistentMessages']->error(
+                        sprintf($this->app['translator']->trans('error.missing.www'), $this->app['projects_dirs'])
+                    );
 
-		return $this->listFromDirectories;
-	}
+                    continue;
+                }
+
+                $finder->in($dir);
+            }
+
+            foreach ($finder as $finded)
+            {
+                $path = $finded->getRealpath();
+
+                $this->listFromDirectories[$path] = [
+                    'path' => $path,
+                    'name' => $finded->getFilename()
+                ];
+            }
+        }
+
+        return $this->listFromDirectories;
+    }
+
+    public function getProjectsFromDatabase()
+    {
+        if (null === $this->listFromDatabase)
+        {
+            $projects = $this->app['db']->executeQuery('SELECT * FROM projects')->fetchAll();
+
+            $this->listFromDatabase = [];
+
+            foreach ($projects as $project)
+            {
+                $project['in_db'] = true;
+                $this->listFromDatabase[$project['path']] = $project;
+            }
+        }
+
+        return $this->listFromDatabase;
+    }
 }

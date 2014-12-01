@@ -56,6 +56,8 @@ installation:
   path: /install
   defaults: 
     _controller: 'Installation::form'
+  requirements:
+    _method: GET
 
 installation_process:
   path: /install
