@@ -17,11 +17,20 @@ projects:
 # ----------------------------------------------------------------------
 
 project:
-  path: /project/{id}
+  path: /project/{path}
   defaults: 
     _controller: 'Project::project'
+  requirements:
+    _method: GET
 
-
+project_process:
+  path: /project/{path}
+  defaults: 
+    _controller: 'Project::process'
+  requirements:
+    _method: POST
+    
+    
 # La page d'informations
 # ----------------------------------------------------------------------
 

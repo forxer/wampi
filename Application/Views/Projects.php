@@ -63,7 +63,7 @@ $(document).ready(function() {
             <p><select id="select-project" name="project" class="form-control" style="width: 100%">
             <option></option>
             <?php foreach ($projectsList as $i => $project) : ?>
-                <option value="<?php echo $view['router']->generate('project', ['id' => $project['name']]) ?>"><?php echo $project['name'] ?></option>
+                <option value="<?php echo $view['router']->generate('project', ['path' => $project['path']]) ?>"><?php echo $project['name'] ?></option>
             <?php endforeach ?>
             </select></p>
         </div>
@@ -78,7 +78,7 @@ $(document).ready(function() {
                 <div class="panel-heading">
 
                     <i class="fa fa-folder"></i>
-                    <a href="<?php echo $view['router']->generate('project', ['id' => $project['name']]) ?>">
+                    <a href="<?php echo $view['router']->generate('project', ['path' => rawurlencode($project['path'])]) ?>">
                         <?php echo $project['name'] ?>
                     </a>
 

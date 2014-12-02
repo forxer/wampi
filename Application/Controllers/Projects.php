@@ -16,7 +16,7 @@ class Projects extends BaseController
             return $this->redirectToRoute('installation');
         }
 
-        return $this->render('Projects/List', [
+        return $this->render('Projects', [
             'vhosts' => $this->app['virtualhosts']->getVirtualHosts(),
             'projectsList' => $this->app['projects']->getProjects(),
             'projectsFirstLetters' => $this->app['projects']->getProjectsFirstLetters(),

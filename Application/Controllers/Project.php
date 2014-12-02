@@ -16,11 +16,15 @@ class Project extends BaseController
             return $this->redirectToRoute('installation');
         }
 
-        $projectId = $this->app['request']->attributes->get('id');
+        $projectPath = rawurldecode($this->app['request']->attributes->get('path'));
 
-        return $this->render('Projects/Project', [
-            'project_id' => $projectId
+        if ($this->app['projects']->projectExistsInDb($projectPath))
+        {
+            $project = $this->app['projects']->getProjectFromDb($projectPath);
+        }
 
+        return $this->render('Project', [
+            'project' => $project
         ]);
     }
 }

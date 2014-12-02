@@ -67,7 +67,7 @@ class Projects
         return $firstLettersList;
     }
 
-    public function getProjectsFromDirectories()
+    protected function getProjectsFromDirectories()
     {
         if (null === $this->listFromDirectories)
         {
@@ -107,11 +107,11 @@ class Projects
         return $this->listFromDirectories;
     }
 
-    public function getProjectsFromDatabase()
+    protected function getProjectsFromDatabase()
     {
         if (null === $this->listFromDatabase)
         {
-            $projects = $this->app['db']->executeQuery('SELECT * FROM projects')->fetchAll();
+            $projects = $this->app['db']->fetchAll('SELECT * FROM projects');
 
             $this->listFromDatabase = [];
 
@@ -124,5 +124,21 @@ class Projects
         }
 
         return $this->listFromDatabase;
+    }
+
+    public function getProjectFromDb($projectPath)
+    {
+        return $this->app['db']->fetchAssoc(
+            'SELECT * FROM projects WHERE path = :path',
+            [ 'path' => $projectPath ]
+        );
+    }
+
+    public function projectExistsInDb($projectPath)
+    {
+        return (boolean)$this->app['db']->fetchColumn(
+            'SELECT COUNT(path) FROM projects WHERE path = :path',
+            [ 'path' => $projectPath ]
+        );
     }
 }
