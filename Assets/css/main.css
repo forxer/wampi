@@ -3,8 +3,12 @@ body {
     padding-top: 70px;
 }
 
-#projects .project{
+/* requirement for mixitup */
+#projects .project {
     display: none;
+}
+#projects .panel {
+    min-height: 150px;
 }
 
 /* Debug panel */

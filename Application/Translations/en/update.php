@@ -9,6 +9,6 @@
 return [
 
     'update.title' => 'Update',
-    'update.update' => 'Update',
+    'update.finalize.update' => 'Finalize the update',
     'update.success' => 'The update was done successfully!'
 ];

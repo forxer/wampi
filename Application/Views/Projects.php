@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 col-md-10">
+        <div class="col-sm-10 col-md-9 col-lg-8">
             <p class="btn-group btn-group-sm">
                 <button type="button" class="btn btn-default filter-btn" data-filter="all"><?php echo $view['translator']->trans('All') ?></button>
                 <?php foreach ($projectsFirstLetters  as $letter) : ?>
@@ -59,11 +59,11 @@ $(document).ready(function() {
             </div>
             -->
         </div>
-        <div class="col-sm-3 col-md-2 form-group pull-right">
+        <div class="col-sm-2 col-md-3 col-lg-4 form-group pull-right">
             <p><select id="select-project" name="project" class="form-control" style="width: 100%">
             <option></option>
             <?php foreach ($projectsList as $i => $project) : ?>
-                <option value="<?php echo $view['router']->generate('project', ['path' => $project['path']]) ?>"><?php echo $project['name'] ?></option>
+                <option value="<?php echo $view['router']->generate('project', ['path' => rawurlencode($project['path'])]) ?>"><?php echo $project['name'] ?></option>
             <?php endforeach ?>
             </select></p>
         </div>
@@ -100,7 +100,7 @@ $(document).ready(function() {
 
                     <?php if (!$project['in_db']) : ?>
                     <a href="" class="pull-right">
-                        <i class="fa fa-lg fa-plus-square"></i>
+                        <i class="fa fa-3x fa-question"></i>
                     </a>
                     <?php endif ?>
 

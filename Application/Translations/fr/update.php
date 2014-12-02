@@ -9,6 +9,6 @@
 return [
 
     'update.title' => 'Mise à jour',
-    'update.update' => 'Mettre à jour',
+    'update.finalize.update' => 'Finaliser la mise à jour',
     'update.success' => 'La mise à jour a été réalisée avec succès !'
 ];

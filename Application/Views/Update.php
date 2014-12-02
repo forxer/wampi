@@ -19,6 +19,6 @@ $view['breadcrumb']->add($view['translator']->trans('update.title'), $view['rout
 
     <form action="<?php echo $view['router']->generate('update_process') ?>" method="post" role="form">
 
-        <p><button type="submit" class="btn btn-primary"><?php echo $view['translator']->trans('update.update') ?></button></p>
+        <p><button type="submit" class="btn btn-primary"><?php echo $view['translator']->trans('update.finalize.update') ?></button></p>
     </form>
 </div><!-- .container -->
