@@ -25,4 +25,13 @@ class BaseController extends Controller
 
         return $this->redirectToRoute('projects');
     }
+
+    protected function checkInstall()
+    {
+        # not installed ?
+        if (!file_exists(__DIR__ . '/../Config/installed')) {
+            return false;
+        }
+        elseif (file_get_content())
+    }
 }
