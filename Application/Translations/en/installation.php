@@ -9,5 +9,6 @@
 return [
 
     'install.title' => 'Installation',
+    'install.install' => 'Install',
     'install.success' => 'The installation was completed successfully!'
 ];

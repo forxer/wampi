@@ -12,8 +12,11 @@ class Projects extends BaseController
     public function projectsList()
     {
         # not installed ?
-        if (!file_exists(__DIR__ . '/../Config/installed')) {
+        if (!$this->isInstalled()) {
             return $this->redirectToRoute('installation');
+        }
+        elseif (!$this->isUpToDate()) {
+            return $this->redirectToRoute('update');
         }
 
         return $this->render('Projects', [

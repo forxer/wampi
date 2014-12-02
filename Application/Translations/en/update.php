@@ -8,7 +8,7 @@
 
 return [
 
-    'install.title' => 'Installation',
-    'install.install' => 'Installer',
-    'install.success' => 'L’installation a été réalisée avec succès !'
+    'update.title' => 'Update',
+    'update.update' => 'Update',
+    'update.success' => 'The update was done successfully!'
 ];

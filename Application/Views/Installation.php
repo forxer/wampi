@@ -46,6 +46,6 @@ $view['breadcrumb']->add($view['translator']->trans('install.title'), $view['rou
             <p><label for="db_password"><?php echo $view['translator']->trans('config.db.password') ?></label>
             <?php echo $view['form']->text('db_password', 60, 255, $config['db_password'], 'form-control') ?></p>
         </div>
-        <p><button type="submit" class="btn btn-primary"><?php echo $view['translator']->trans('Save') ?></button></p>
+        <p><button type="submit" class="btn btn-primary"><?php echo $view['translator']->trans('install.install') ?></button></p>
     </form>
 </div><!-- .container -->

@@ -76,6 +76,27 @@ installation_process:
     _method: POST
 
 
+
+# La page de mise à jour
+# ----------------------------------------------------------------------
+
+update:
+  path: /update
+  defaults: 
+    _controller: 'Update::form'
+    update: true
+  requirements:
+    _method: GET
+
+update_process:
+  path: /update
+  defaults: 
+    _controller: 'Update::process'
+    update: true
+  requirements:
+    _method: POST
+    
+
 # Changement de langue
 # ----------------------------------------------------------------------
 

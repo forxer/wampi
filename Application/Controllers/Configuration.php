@@ -17,8 +17,11 @@ class Configuration extends BaseController
     public function form()
     {
         # not installed ?
-        if (!file_exists(__DIR__ . '/../Config/installed')) {
+        if (!$this->isInstalled()) {
             return $this->redirectToRoute('installation');
+        }
+        elseif (!$this->isUpToDate()) {
+            return $this->redirectToRoute('update');
         }
 
         if (null === $this->config) {

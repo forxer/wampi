@@ -11,6 +11,15 @@ use Tao\Controller\Controller;
 
 class BaseController extends Controller
 {
+    protected static $installedFile;
+
+    public function __construct($app)
+    {
+        self::$installedFile = __DIR__ . '/../Config/installed';
+
+        return parent::__construct($app);
+    }
+
     public function language()
     {
         $locale = $this->app['request']->attributes->get('locale');
@@ -26,12 +35,13 @@ class BaseController extends Controller
         return $this->redirectToRoute('projects');
     }
 
-    protected function checkInstall()
+    protected function isInstalled()
     {
-        # not installed ?
-        if (!file_exists(__DIR__ . '/../Config/installed')) {
-            return false;
-        }
-        elseif (file_get_content())
+        return file_exists(self::$installedFile);
+    }
+
+    protected function isUpToDate()
+    {
+        return version_compare(trim(file_get_contents(self::$installedFile)), $this->app->getVersion(), '>=');
     }
 }

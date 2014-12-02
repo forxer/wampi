@@ -12,8 +12,11 @@ class Information extends BaseController
     public function infos()
     {
         # not installed ?
-        if (!file_exists(__DIR__ . '/../Config/installed')) {
+        if (!$this->isInstalled()) {
             return $this->redirectToRoute('installation');
+        }
+        elseif (!$this->isUpToDate()) {
+            return $this->redirectToRoute('update');
         }
 
         return $this->render('Information', [

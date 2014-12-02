@@ -26,6 +26,23 @@ class Installation extends BaseController
 
     public function process()
     {
+        if (!$this->handleRequestConfigValues()) {
+            return $this->form();
+        }
+
+        $this->createDatabaseIfNotExists();
+
+        $this->databaseSchema();
+
+        $this->installedFile();
+
+        $this->app['flashMessages']->success($this->app['translator']->trans('install.success'));
+
+        return $this->redirectToRoute('projects');
+    }
+
+    protected function handleRequestConfigValues()
+    {
         # populate an array with request values
         $newConfig = [];
         foreach ($this->app['configuration']->getCustomizableFieldsNames() as $fieldName) {
@@ -45,16 +62,41 @@ class Installation extends BaseController
             return $this->form();
         }
 
-        # update config values with collected data here and in the app
+        # live update of config values with validated data
         $this->config = $validated;
-        foreach ($this->config as $k=>$v) {
+        foreach ($this->config as $k => $v) {
             $this->app[$k] = $v;
         }
 
         # save custom config values
         $this->app['configuration']->save($validated);
 
-        # update db schema
+        return true;
+    }
+
+    protected function createDatabaseIfNotExists()
+    {
+        $connectionParams = [
+            'driver'    => 'pdo_mysql',
+            'host'      => $this->app['db_host'],
+            'user'      => $this->app['db_user'],
+            'password'  => $this->app['db_password'],
+            'charset'   => 'utf8'
+        ];
+
+        $driverClass = $this->app['class']['database.driver_manager'];
+
+        $conn = $driverClass::getConnection($connectionParams, $this->app['db.config']);
+
+        $databases = $conn->getSchemaManager()->listDatabases();
+
+        if (!in_array($this->app['db_name'], $databases)) {
+            $conn->query('CREATE DATABASE `' . $this->app['db_name'] . '`');
+        }
+    }
+
+    protected function databaseSchema()
+    {
         $conn = $this->app['db'];
 
         $newSchema = new Schema();
@@ -74,12 +116,10 @@ class Installation extends BaseController
         foreach ($sql as $query) {
             $conn->query($query);
         }
+    }
 
-        # create an "installed" file
-        file_put_contents(__DIR__ . '/../Config/installed', time());
-
-        $this->app['flashMessages']->success($this->app['translator']->trans('install.success'));
-
-        return $this->redirectToRoute('projects');
+    protected function installedFile()
+    {
+        file_put_contents(self::$installedFile, $this->app->getVersion());
     }
 }
