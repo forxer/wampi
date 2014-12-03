@@ -62,4 +62,15 @@ class Application extends TaoApplication
     {
         return self::VERSION;
     }
+
+    public function clearCache()
+    {
+        $cache = $this['finder']
+            ->notName('.gitkeep')
+            ->depth('== 0')
+            ->in(__DIR__ . '/Storage/Cache')
+        ;
+
+        $this['filesystem']->remove($cache);
+    }
 }

@@ -28,6 +28,8 @@ class Update extends Installation
 
         $this->installedFile();
 
+        $this->app->clearCache();
+
         $this->app['flashMessages']->success($this->app['translator']->trans('update.success'));
 
         return $this->redirectToRoute('projects');

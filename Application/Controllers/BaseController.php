@@ -35,6 +35,13 @@ class BaseController extends Controller
         return $this->redirectToRoute('projects');
     }
 
+    public function clearCache()
+    {
+        $this->app->clearCache();
+
+        return $this->redirectToRoute('projects');
+    }
+
     protected function isInstalled()
     {
         return file_exists(self::$installedFile);

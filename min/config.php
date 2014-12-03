@@ -49,6 +49,9 @@ $min_allowDebugFlag = false;
  * will have to load extra code to guess. Some examples below:
  */
 $min_cachePath = __DIR__ . '/../Application/Storage/Cache/Minify';
+if (!is_dir($min_cachePath)) {
+    mkdir($min_cachePath);
+}
 //$min_cachePath = 'c:\\WINDOWS\\Temp';
 //$min_cachePath = '/tmp';
 //$min_cachePath = preg_replace('/^\\d+;/', '', session_save_path());

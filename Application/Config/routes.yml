@@ -105,6 +105,14 @@ language:
     defaults:
       _controller: 'BaseController::language'
 
+ 
+# Vidange du cache
+# ----------------------------------------------------------------------
+
+clear_cache:
+  path: /cc
+  defaults: 
+    _controller: 'BaseController::clearCache'
 
 # Utilitaire pour supprimer un éventuel slash de fin
 # ----------------------------------------------------------------------
