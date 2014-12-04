@@ -13,8 +13,12 @@ class Update extends Installation
 {
     public function form()
     {
+        # not installed ?
+        if (!$this->isInstalled()) {
+            return $this->redirectToRoute('installation');
+        }
         # allready up to date ?
-        if ($this->isUpToDate()) {
+        elseif ($this->isUpToDate()) {
             return $this->redirectToRoute('projects');
         }
 

@@ -18,6 +18,16 @@ class Projects
 
     protected $listFromDatabase;
 
+    protected $project = [
+        'path' => null,
+        'name' => null,
+        'vhost' => false,
+        'vhost_file' => null,
+        'vhost_url' => null,
+        'composer' => false,
+        'composer_content' => null
+    ];
+
     public function __construct(Application $app)
     {
         $this->app = $app;
@@ -67,7 +77,7 @@ class Projects
         return $firstLettersList;
     }
 
-    protected function getProjectsFromDirectories()
+    public function getProjectsFromDirectories()
     {
         if (null === $this->listFromDirectories)
         {
@@ -107,7 +117,20 @@ class Projects
         return $this->listFromDirectories;
     }
 
-    protected function getProjectsFromDatabase()
+    public function getProjectFromDirectories($projectPath)
+    {
+        $project = $this->project;
+
+        if (file_exists($projectPath))
+        {
+            $project['path'] = $projectPath;
+            $project['name'] = basename($projectPath);
+        }
+
+        return $project;
+    }
+
+    public function getProjectsFromDatabase()
     {
         if (null === $this->listFromDatabase)
         {
@@ -126,7 +149,7 @@ class Projects
         return $this->listFromDatabase;
     }
 
-    public function getProjectFromDb($projectPath)
+    public function getProjectFromDatabase($projectPath)
     {
         return $this->app['db']->fetchAssoc(
             'SELECT * FROM projects WHERE path = :path',

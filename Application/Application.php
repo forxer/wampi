@@ -56,6 +56,7 @@ class Application extends TaoApplication
 
         $this['templating']->get('assets')->addPackage('components',
             new PathPackage($this['app_url'] . $this['components_url']));
+
     }
 
     public function getVersion()

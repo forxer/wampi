@@ -19,7 +19,7 @@
 		"php" : ">=5.5",
 		"doctrine/dbal" : "~2.4",
 		"filp/whoops" : "~1.1",
-		"forxer/tao" : "~0.8",
+		"forxer/tao" : "dev-master",
 		"knplabs/github-api" : "~1.3",
 		"mrclay/minify" : "~2.2",
 		"raveren/kint" : "~0.9",

@@ -21,16 +21,14 @@ class Project extends BaseController
 
         $projectPath = rawurldecode($this->app['request']->attributes->get('path'));
 
-        $project = [
-            'path' => 'foo',
-            'name' => 'bar',
-
-        ];
+        $project = [];
 
         if ($this->app['projects']->projectExistsInDb($projectPath))
         {
-            $project = $this->app['projects']->getProjectFromDb($projectPath);
+            $project = $this->app['projects']->getProjectFromDatabase($projectPath);
         }
+
+        $project += $this->app['projects']->getProjectFromDirectories($projectPath);
 
         return $this->render('Project', [
             'project' => $project

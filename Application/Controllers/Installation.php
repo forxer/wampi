@@ -20,7 +20,7 @@ class Installation extends BaseController
             return $this->redirectToRoute('update');
         }
         # or allready installed ?
-        if ($this->isInstalled()) {
+        elseif ($this->isInstalled()) {
             return $this->redirectToRoute('projects');
         }
 
