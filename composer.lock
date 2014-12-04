@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "86013c038118dc4c5a0df9726d61d55f",
+    "hash": "7be7479dccc5016346e6755459615929",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -528,16 +528,16 @@
         },
         {
             "name": "forxer/tao",
-            "version": "dev-master",
+            "version": "0.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/forxer/tao.git",
-                "reference": "06faa9255d47c6a12b4e9cd27586c41aae2f92d8"
+                "reference": "9ee477942a96cc0dbf7cd059dcd5bacbb5b79f34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/forxer/tao/zipball/06faa9255d47c6a12b4e9cd27586c41aae2f92d8",
-                "reference": "06faa9255d47c6a12b4e9cd27586c41aae2f92d8",
+                "url": "https://api.github.com/repos/forxer/tao/zipball/9ee477942a96cc0dbf7cd059dcd5bacbb5b79f34",
+                "reference": "9ee477942a96cc0dbf7cd059dcd5bacbb5b79f34",
                 "shasum": ""
             },
             "require": {
@@ -584,7 +584,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2014-12-04 08:21:25"
+            "time": "2014-11-28 17:30:43"
         },
         {
             "name": "guzzle/guzzle",
@@ -1682,9 +1682,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "forxer/tao": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.5"
