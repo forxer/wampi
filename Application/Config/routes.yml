@@ -4,7 +4,7 @@
 # file that was distributed with this source code.
 
  
-# La liste des projets
+# The list of projects (home page)
 # ----------------------------------------------------------------------
 
 projects:
@@ -13,7 +13,7 @@ projects:
     _controller: 'Projects::projectsList'
 
 
-# La page d'un projet
+# Page of a project
 # ----------------------------------------------------------------------
 
 project:
@@ -31,7 +31,7 @@ project_process:
     _method: POST
     
     
-# La page d'informations
+# Information page
 # ----------------------------------------------------------------------
 
 information:
@@ -40,7 +40,7 @@ information:
     _controller: 'Information::infos'
 
 
-# La page de configuration
+# Configuration page
 # ----------------------------------------------------------------------
 
 configuration:
@@ -58,7 +58,7 @@ configuration_process:
     _method: POST
 
 
-# La page d'installation
+# Installation page
 # ----------------------------------------------------------------------
 
 installation:
@@ -76,15 +76,13 @@ installation_process:
     _method: POST
 
 
-
-# La page de mise à jour
+# Page to apply the update
 # ----------------------------------------------------------------------
 
 update:
   path: /update
   defaults: 
     _controller: 'Update::form'
-    update: true
   requirements:
     _method: GET
 
@@ -92,12 +90,29 @@ update_process:
   path: /update
   defaults: 
     _controller: 'Update::process'
-    update: true
   requirements:
     _method: POST
-    
 
-# Changement de langue
+
+# Switch release type (stable or pre)
+# ----------------------------------------------------------------------
+
+update_switch_releases_type:
+  path: /update/switch-releases-type
+  defaults: 
+    _controller: 'Update::switchReleasesType'
+
+
+# Download an update archive
+# ----------------------------------------------------------------------
+
+update_download:
+  path: /update/download
+  defaults: 
+    _controller: 'Update::download'
+
+
+# Change language
 # ----------------------------------------------------------------------
 
 language:
@@ -106,7 +121,7 @@ language:
       _controller: 'BaseController::language'
 
  
-# Vidange du cache
+# Emptying the cache
 # ----------------------------------------------------------------------
 
 clear_cache:
@@ -114,7 +129,8 @@ clear_cache:
   defaults: 
     _controller: 'BaseController::clearCache'
 
-# Utilitaire pour supprimer un éventuel slash de fin
+
+# Utility to remove a possible trailing slash
 # ----------------------------------------------------------------------
 
 remove_trailing_slash:

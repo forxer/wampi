@@ -38,6 +38,9 @@ return [
     'db_user' 		=> 'root',
     'db_password' 	=> '',
 
+    # Search or not for pre-release update
+    'pre_releases_update' => false,
+
     # Controllers namespace name
     'routing.controllers_namespace' => 'Application\Controllers',
 

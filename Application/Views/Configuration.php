@@ -93,6 +93,8 @@ $view['breadcrumb']->add($view['translator']->trans('Configuration'), $view['rou
                                 <p><a href="<?php echo $latestRelease['assets'][0]['browser_download_url']?>" class="btn btn-success"><i class="fa fa-download"></i>
                                 <?php echo $view['translator']->trans('config.download.latest.release') ?></a></p>
                             <?php endif ?>
+
+                            <p><a href="<?php echo $view['router']->generate('update_switch_releases_type') ?>" class="btn btn-primary">Type</a></p>
                         </div>
                         <div class="col-sm-6">
                             <h3><?php echo $view['translator']->trans('config.latest.release', ['%release%' => $latestRelease['name']]) ?></h3>

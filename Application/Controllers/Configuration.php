@@ -28,7 +28,7 @@ class Configuration extends BaseController
             $this->config = $this->app['configuration']->getCustomizableFieldsFromConfig();
         }
 
-        $latestRelease = $this->getLatestRelease();
+        $latestRelease = $this->getLatestRelease($this->app['pre_releases_update']);
 
         return $this->render('Configuration', [
             'config' => $this->config,
@@ -42,7 +42,7 @@ class Configuration extends BaseController
         # populate an array with request values
         $newConfig = [];
         foreach ($this->app['configuration']->getCustomizableFieldsNames() as $fieldName) {
-            $newConfig[$fieldName] =  $this->app['request']->request->get($fieldName);
+            $newConfig[$fieldName] = $this->app['request']->request->get($fieldName);
         }
 
         # validate values
@@ -66,7 +66,7 @@ class Configuration extends BaseController
         return $this->redirectToRoute('configuration');
     }
 
-    protected function getLatestRelease()
+    protected function getLatestRelease($bPreReleases = false)
     {
         $client = new GithubClient(
             new GithubCache(['cache_dir' => $this->app->utilities->getApplicationPath() . '/Storage/Cache/Github'])
@@ -74,10 +74,14 @@ class Configuration extends BaseController
 
         $releases = $client->api('repo')->releases()->all('forxer', 'wampi');
 
-        # remove pre-release
-        foreach ($releases as $k => $v) {
-            if ($v['prerelease']) {
-                unset($releases[$k]);
+        if (!$bPreReleases)
+        {
+            # remove pre-releases from list
+            foreach ($releases as $k => $v)
+            {
+                if ($v['prerelease']) {
+                    unset($releases[$k]);
+                }
             }
         }
 

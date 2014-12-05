@@ -20,7 +20,8 @@ class Configuration
         'db_host',
         'db_name',
         'db_user',
-        'db_password'
+        'db_password',
+        'pre_releases_update'
     ];
 
     private $dist;
@@ -94,10 +95,22 @@ class Configuration
     }
 
     /**
+     * Save singtle custom configuration value into the configuration file.
+     *
+     * @param array $newConfig
+     */
+    public function saveSingleValue(array $newValue)
+    {
+        $newConfig = $newValue + $this->getCustom();
+
+        return $this->save($newConfig);
+    }
+
+    /**
      * Return an array of configuration values to validate.
      *
      * In fact, return values ​​that are different from the distribution values
-     * and are not in customizable fields list.
+     * and are not in customizable values list.
      *
      * @param array $newConfig
      * @return array
@@ -135,9 +148,11 @@ class Configuration
             $validated['app_name'] = trim(strip_tags($toValidate['app_name']));
         }
 
-        $validated['debug'] = !empty($toValidate['debug']) ? true : false;
+        if (isset($toValidate['debug'])) {
+            $validated['debug'] = (boolean)$toValidate['debug'];
+        }
 
-        if (!empty($toValidate['wampserver_dir']))
+        if (isset($toValidate['wampserver_dir']))
         {
             if (!is_dir($toValidate['wampserver_dir']))
             {
@@ -156,7 +171,7 @@ class Configuration
             }
         }
 
-        if (!empty($toValidate['projects_dirs']))
+        if (isset($toValidate['projects_dirs']))
         {
             $validated['projects_dirs'] = [];
 
@@ -184,20 +199,24 @@ class Configuration
             $validated['projects_dirs'] = implode(PATH_SEPARATOR, $validated['projects_dirs']);
         }
 
-        if (!empty($toValidate['db_host'])) {
+        if (isset($toValidate['db_host'])) {
             $validated['db_host'] = trim(strip_tags($toValidate['db_host']));
         }
 
-        if (!empty($toValidate['db_name'])) {
+        if (isset($toValidate['db_name'])) {
             $validated['db_name'] = trim(strip_tags($toValidate['db_name']));
         }
 
-        if (!empty($toValidate['db_user'])) {
+        if (isset($toValidate['db_user'])) {
             $validated['db_user'] = trim(strip_tags($toValidate['db_user']));
         }
 
-        if (!empty($toValidate['db_password'])) {
+        if (isset($toValidate['db_password'])) {
             $validated['db_password'] = trim(strip_tags($toValidate['db_password']));
+        }
+
+        if (isset($toValidate['pre_releases_update'])) {
+            $validated['pre_releases_update'] = (boolean)$toValidate['pre_releases_update'];
         }
 
         return $validated;

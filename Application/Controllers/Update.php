@@ -39,4 +39,21 @@ class Update extends Installation
         return $this->redirectToRoute('projects');
     }
 
+    public function switchReleasesType()
+    {
+        $newConfig = [
+            'pre_releases_update' => $this->app['pre_releases_update'] ? false : true
+        ];
+
+        $validated = $this->app['configuration']->validate($newConfig);
+
+        $this->app['configuration']->saveSingleValue($validated);
+
+        return $this->redirectToRoute('configuration');
+    }
+
+    public function download()
+    {
+
+    }
 }

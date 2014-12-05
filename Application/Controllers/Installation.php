@@ -15,12 +15,14 @@ class Installation extends BaseController
 
     public function form()
     {
-        # need an update ?
-        if (!$this->isUpToDate()) {
-            return $this->redirectToRoute('update');
-        }
-        # or allready installed ?
-        elseif ($this->isInstalled()) {
+        # allready installed ?
+        if ($this->isInstalled())
+        {
+            # need an update ?
+            if (!$this->isUpToDate()) {
+                return $this->redirectToRoute('update');
+            }
+
             return $this->redirectToRoute('projects');
         }
 
