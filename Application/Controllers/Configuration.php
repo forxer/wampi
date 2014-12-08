@@ -30,6 +30,27 @@ class Configuration extends BaseController
 
         $latestRelease = $this->getLatestRelease($this->app['pre_releases_update']);
 
+        /*
+        $panels = new \ArrayObject([
+            'general' => [
+                'title' => $this->app['translator']->trans('config.tab.general'),
+                'content' => $this->renderView('Configuration/general')
+            ],
+            'paths' => [
+                'title' => $this->app['translator']->trans('config.tab.paths'),
+                'content' => $this->renderView('Configuration/paths')
+            ],
+            'database' => [
+                'title' => $this->app['translator']->trans('config.tab.db'),
+                'content' => $this->renderView('Configuration/database')
+            ],
+            'version' => [
+                'title' => $this->app['translator']->trans('config.tab.version'),
+                'content' => $this->renderView('Configuration/version')
+            ]
+        ]);
+        */
+
         return $this->render('Configuration', [
             'config' => $this->config,
             'latestRelease' => $latestRelease,

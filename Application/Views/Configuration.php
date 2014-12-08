@@ -86,6 +86,16 @@ $view['breadcrumb']->add($view['translator']->trans('Configuration'), $view['rou
                 <div role="tabpanel" class="tab-pane fade" id="tab-version">
                     <h2><?php echo $view['translator']->trans('config.tab.version.title') ?></h2>
 
+                    <div>
+                        <a href="<?php echo $view['router']->generate('update_switch_releases_type') ?>" class="btn btn-primary"><?php
+                        if ($app['pre_releases_update']) : ?>
+                        <?php echo $view['translator']->trans('config.check.stables.release') ?>
+                        <?php else : ?>
+                        <?php echo $view['translator']->trans('config.check.dev.release') ?>
+                        <?php endif ?>
+                        </a>
+                    </div>
+
                     <div class="row">
                         <div class="col-sm-6">
                             <h3><?php echo $view['translator']->trans('config.your.version', ['%release%' => $app->getVersion()]) ?></h3>
@@ -96,13 +106,6 @@ $view['breadcrumb']->add($view['translator']->trans('Configuration'), $view['rou
                                 <p><a href="<?php echo $latestRelease['assets'][0]['browser_download_url']?>" class="btn btn-success"><i class="fa fa-download"></i>
                                 <?php echo $view['translator']->trans('config.download.latest.release') ?></a></p>
                             <?php endif ?>
-
-                            <p><a href="<?php echo $view['router']->generate('update_switch_releases_type') ?>" class="btn btn-primary"><?php
-                            if ($app['pre_releases_update']) : ?>
-                            <?php echo $view['translator']->trans('config.check.stables.release') ?>
-                            <?php else : ?>
-                            <?php echo $view['translator']->trans('config.check.dev.release') ?>
-                            <?php endif ?></a></p>
                         </div>
                         <div class="col-sm-6">
                             <h3><?php echo $view['translator']->trans('config.latest.release', ['%release%' => $latestRelease['name']]) ?></h3>
