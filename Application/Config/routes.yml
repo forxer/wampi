@@ -58,6 +58,15 @@ configuration_process:
     _method: POST
 
 
+# Switch debug mode
+# ----------------------------------------------------------------------
+
+configuration_switch_debug:
+  path: /configuration/switch-debug
+  defaults: 
+    _controller: 'Configuration::switchDebug'
+    
+
 # Installation page
 # ----------------------------------------------------------------------
 

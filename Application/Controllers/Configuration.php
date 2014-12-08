@@ -66,6 +66,17 @@ class Configuration extends BaseController
         return $this->redirectToRoute('configuration');
     }
 
+    public function switchDebug()
+    {
+        $validated = $this->app['configuration']->validate([
+            'debug' => $this->app['debug'] ? false : true
+        ]);
+
+        $this->app['configuration']->save($validated);
+
+        return $this->redirectToRoute('configuration');
+    }
+
     protected function getLatestRelease($bPreReleases = false)
     {
         $client = new GithubClient(

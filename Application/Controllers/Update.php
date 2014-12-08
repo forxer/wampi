@@ -41,11 +41,9 @@ class Update extends Installation
 
     public function switchReleasesType()
     {
-        $newConfig = [
+        $validated = $this->app['configuration']->validate([
             'pre_releases_update' => $this->app['pre_releases_update'] ? false : true
-        ];
-
-        $validated = $this->app['configuration']->validate($newConfig);
+        ]);
 
         $this->app['configuration']->save($validated);
 
