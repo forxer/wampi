@@ -52,6 +52,12 @@ class Update extends Installation
 
     public function download()
     {
+        # make backup
+
+        # download
+
+        # unzip
+
 
     }
 }

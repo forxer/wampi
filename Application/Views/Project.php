@@ -35,11 +35,11 @@ $view['breadcrumb']->add($project['name']);
                     <h2><?php echo $view['translator']->trans('project.tab.general.title') ?></h2>
                     <div class="form-group">
                         <p><label for="project_name"><?php echo $view['translator']->trans('project.name') ?></label>
-                        <?php echo $view['form']->text('project_name', 60, 255, $project['name'], 'form-control') ?></p>
+                        <input type="text" id="project_name" name="project_name" class="form-control" maxlength="255" size="60" value="<?php echo $view->e($project['name']) ?>"></p>
                     </div>
                     <div class="form-group">
                         <p><label for="project_path"><?php echo $view['translator']->trans('project.path') ?></label>
-                        <?php echo $view['form']->text('project_path', 60, 255, $project['path'], 'form-control') ?></p>
+                        <input type="text" id="project_name" name="project_name" class="form-control" maxlength="255" size="60" readonly value="<?php echo $view->e($project['path']) ?>"></p>
                     </div>
                 </div><!-- #tab-general -->
                 <div role="tabpanel" class="tab-pane fade" id="tab-vhost">

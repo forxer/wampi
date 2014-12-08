@@ -3,13 +3,9 @@
     "dependencies": {
         "bootstrap" : 				"3.3.*",
         "fontawesome" :				"4.*",
-        "holderjs" : 				"2.4.*",
         "html5shiv" : 				"3.7.*",
         "jquery" : 					"1.*",
-        "jquery-cookie" : 			"1.*",
-        "jquery-validation" : 		"1.13.*",
         "mixitup" : 				"2.1.*",
-        "normalize-css" : 			"2.*",
         "respond" :					"1.4.*",
         "select2" : 				"3.*"
     }
