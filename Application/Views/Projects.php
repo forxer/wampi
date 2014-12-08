@@ -99,7 +99,7 @@ $(document).ready(function() {
                 <div class="panel-body">
 
                     <?php if (!$project['in_db']) : ?>
-                    <a href="" class="pull-right">
+                    <a href="<?php echo $view['router']->generate('project', ['path' => rawurlencode($project['path'])]) ?>" class="pull-right">
                         <i class="fa fa-3x fa-question"></i>
                     </a>
                     <?php endif ?>

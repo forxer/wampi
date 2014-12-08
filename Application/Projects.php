@@ -117,19 +117,6 @@ class Projects
         return $this->listFromDirectories;
     }
 
-    public function getProjectFromDirectories($projectPath)
-    {
-        $project = $this->project;
-
-        if (file_exists($projectPath))
-        {
-            $project['path'] = $projectPath;
-            $project['name'] = basename($projectPath);
-        }
-
-        return $project;
-    }
-
     public function getProjectsFromDatabase()
     {
         if (null === $this->listFromDatabase)
@@ -147,21 +134,5 @@ class Projects
         }
 
         return $this->listFromDatabase;
-    }
-
-    public function getProjectFromDatabase($projectPath)
-    {
-        return $this->app['db']->fetchAssoc(
-            'SELECT * FROM projects WHERE path = :path',
-            [ 'path' => $projectPath ]
-        );
-    }
-
-    public function projectExistsInDb($projectPath)
-    {
-        return (boolean)$this->app['db']->fetchColumn(
-            'SELECT COUNT(path) FROM projects WHERE path = :path',
-            [ 'path' => $projectPath ]
-        );
     }
 }

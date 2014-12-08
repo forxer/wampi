@@ -29,6 +29,10 @@ class Application extends TaoApplication
             return new Projects($app);
         };
 
+        $this['project'] = function($app) {
+            return new Project($app);
+        };
+
         $this['informations'] = function($app) {
             return new Information($app);
         };

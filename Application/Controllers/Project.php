@@ -26,6 +26,11 @@ class Project extends BaseController
 
         $this->setProject();
 
+        # if project not store in DB, store it now, immediatly
+        if (!$this->project['in_db']) {
+            return $this->addProject();
+        }
+
         return $this->render('Project', [
             'project' => $this->project
         ]);
@@ -37,30 +42,36 @@ class Project extends BaseController
 
         $this->project['name'] = $this->app['request']->request->get('name');
 
-        if ($this->project['in_db'])
-        {
-            $this->app['db']->update(
-                'projects',
-                [
-                    'name' => $this->project['name']
-                ],
-                [
-                    'path' => $this->projectPath
-                ]
-            );
-        }
-        else
-        {
-            $this->app['db']->insert(
-                'projects',
-                [
-                    'path' => $this->projectPath,
-                    'name' => $this->project['name']
-                ]
-            );
-        }
+        $this->app['db']->update(
+            'projects',
+            [
+                'name' => $this->project['name']
+            ],
+            [
+                'path' => $this->projectPath
+            ]
+        );
 
         $this->app['flashMessages']->success($this->app['translator']->trans('project.success'));
+
+        return $this->redirectToRoute('project', ['path' => rawurlencode($this->projectPath)]);
+    }
+
+    protected function addProject()
+    {
+        // retrieve project data
+
+        // store project data
+        $this->app['db']->insert(
+            'projects',
+            [
+                'path' => $this->projectPath,
+                'name' => $this->project['name']
+            ]
+        );
+
+        // redirect to project stored
+        $this->app['flashMessages']->success($this->app['translator']->trans('project.added'));
 
         return $this->redirectToRoute('project', ['path' => rawurlencode($this->projectPath)]);
     }
@@ -73,9 +84,9 @@ class Project extends BaseController
         {
             $this->project = [];
 
-            if ($this->app['projects']->projectExistsInDb($this->projectPath))
+            if ($this->app['project']->projectExistsInDb($this->projectPath))
             {
-                $this->project = $this->app['projects']->getProjectFromDatabase($this->projectPath);
+                $this->project = $this->app['project']->getProjectFromDatabase($this->projectPath);
 
                 $this->project['in_db'] = true;
             }
@@ -83,7 +94,7 @@ class Project extends BaseController
                 $this->project['in_db'] = false;
             }
 
-            $this->project += $this->app['projects']->getProjectFromDirectories($this->projectPath);
+            $this->project += $this->app['project']->getProjectFromDirectories($this->projectPath);
         }
     }
 }
