@@ -48,8 +48,8 @@ class Configuration extends BaseController
         # validate values
         $validated = $this->app['configuration']->validate($newConfig);
 
-        # if no value or error on validation, redirect to form
-        if (empty($validated) || $this->app['messages']->hasError())
+        # if error on validation, redirect to form
+        if ($this->app['messages']->hasError())
         {
             # populate config values with collected data merged with current values
             $this->config = $validated + $this->app['configuration']->getCustomizableFieldsFromConfig();

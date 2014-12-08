@@ -48,6 +48,11 @@ class Configuration
         return $this->getCustom() + $this->getDist();
     }
 
+    /**
+     * Get customizable fields names
+     *
+     * @return array
+     */
     public function getCustomizableFieldsNames()
     {
         return $this->customizableFields;
@@ -86,24 +91,19 @@ class Configuration
      */
     public function save(array $newConfig)
     {
-        $content =
-        '<?php' .  "\n\n" .
-        'return ' .
-        var_export($newConfig, true) .  ";\n\n";
+        # if no data to store, remove file
+        if (empty($newConfig)) {
+            $this->app['filesystem']->remove($this->getConfigFilename());
+        }
+        else
+        {
+            $content =
+                '<?php' . "\n\n" .
+                'return ' .
+                var_export($newConfig, true) .  ";\n\n";
 
-        $this->app['filesystem']->dumpFile($this->getConfigFilename(), $content);
-    }
-
-    /**
-     * Save singtle custom configuration value into the configuration file.
-     *
-     * @param array $newConfig
-     */
-    public function saveSingleValue(array $newValue)
-    {
-        $newConfig = $newValue + $this->getCustom();
-
-        return $this->save($newConfig);
+            $this->app['filesystem']->dumpFile($this->getConfigFilename(), $content);
+        }
     }
 
     /**
@@ -126,9 +126,11 @@ class Configuration
             if (!in_array($k, $this->customizableFields)) {
                 unset($toStore[$k]);
             }
-
-            if ($v === $distConfig[$k]) {
+            elseif ($v === $distConfig[$k]) {
                 unset($toStore[$k]);
+            }
+            else {
+                $toStore[$k] = $v;
             }
         }
 
@@ -145,7 +147,7 @@ class Configuration
     {
         $validated = [];
 
-        if (!empty($toValidate['app_name'])) {
+        if (isset($toValidate['app_name'])) {
             $validated['app_name'] = trim(strip_tags($toValidate['app_name']));
         }
 

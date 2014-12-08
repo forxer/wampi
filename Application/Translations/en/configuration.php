@@ -34,6 +34,9 @@ return [
     'config.your.version.expired' => 'A newer version is available.',
     'config.download.latest.release' => 'Download the latest release',
 
+    'config.check.stables.release' => 'Check stable releases',
+    'config.check.dev.release' => 'Check development releases',
+
     'config.latest.release' => 'Latest published version: <em>%release%</em>',
     'config.tab.latest.release.zip' => 'Download <a href="%url%">the zip file</a> of this version',
     'config.tab.latest.release.show.github' => 'Show this version on <a href="%url%">GitHub</a>',
@@ -41,4 +44,3 @@ return [
 
     'config.success' => 'The configuration has been successfully updated.'
 ];
-

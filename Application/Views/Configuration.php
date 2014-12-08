@@ -94,7 +94,12 @@ $view['breadcrumb']->add($view['translator']->trans('Configuration'), $view['rou
                                 <?php echo $view['translator']->trans('config.download.latest.release') ?></a></p>
                             <?php endif ?>
 
-                            <p><a href="<?php echo $view['router']->generate('update_switch_releases_type') ?>" class="btn btn-primary">Type</a></p>
+                            <p><a href="<?php echo $view['router']->generate('update_switch_releases_type') ?>" class="btn btn-primary"><?php
+                            if ($app['pre_releases_update']) : ?>
+                            <?php echo $view['translator']->trans('config.check.stables.release') ?>
+                            <?php else : ?>
+                            <?php echo $view['translator']->trans('config.check.dev.release') ?>
+                            <?php endif ?></a></p>
                         </div>
                         <div class="col-sm-6">
                             <h3><?php echo $view['translator']->trans('config.latest.release', ['%release%' => $latestRelease['name']]) ?></h3>
