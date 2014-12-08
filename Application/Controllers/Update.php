@@ -47,7 +47,7 @@ class Update extends Installation
 
         $validated = $this->app['configuration']->validate($newConfig);
 
-        $this->app['configuration']->saveSingleValue($validated);
+        $this->app['configuration']->save($validated);
 
         return $this->redirectToRoute('configuration');
     }

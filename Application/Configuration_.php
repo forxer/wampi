@@ -72,9 +72,9 @@ class Configuration
      */
     public function validate($newConfig)
     {
-        $validated = $this->performValidation($newConfig);
+        $toValidate = $this->getToValidate($newConfig);
 
-        $validated = $this->removeUnstorable($validated);
+        $validated = $this->performValidation($toValidate);
 
         return $validated;
     }
@@ -107,7 +107,7 @@ class Configuration
     }
 
     /**
-     * Return an array of configuration values without values to not store.
+     * Return an array of configuration values to validate.
      *
      * In fact, return values ​​that are different from the distribution values
      * and are not in customizable values list.
@@ -115,24 +115,23 @@ class Configuration
      * @param array $newConfig
      * @return array
      */
-    private function removeUnstorable(array $newConfig = [])
+    private function getToValidate(array $newConfig = [])
     {
         $distConfig = $this->getDist();
 
-        $toStore = $this->getCustom();
-
+        $toValidate = [];
         foreach ($newConfig as $k => $v)
         {
             if (!in_array($k, $this->customizableFields)) {
-                unset($toStore[$k]);
+                continue;
             }
 
-            if ($v === $distConfig[$k]) {
-                unset($toStore[$k]);
+            if ($v !== $distConfig[$k]) {
+                $toValidate[$k] = $v;
             }
         }
 
-        return $toStore;
+        return $toValidate;
     }
 
     /**
