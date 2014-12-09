@@ -16,11 +16,39 @@ class VirtualHosts
 
     protected $cacheFilename;
 
-    public function __construct(Application $app)
+    protected $dir;
+
+    public function __construct(Application $app, $dir = null)
     {
         $this->app = $app;
 
         $this->cacheFilename = __DIR__ . '/Storage/Cache/vhost.php';
+
+        if (null === $dir) {
+            $dir = $this->app['wampserver_dir'] . '/vhosts';
+        }
+
+        $this->setDir($dir);
+    }
+
+    public function getDir()
+    {
+        return $this->dir;
+    }
+
+    public function setDir($dir)
+    {
+        $this->dir = $dir;
+    }
+
+    public function addVirtualHost($project, $filename, $url, array $options = [])
+    {
+        $file = $this->getDir() . '/' . $filename;
+
+        if (!file_exists($file))
+        {
+            file_put_contents($file, sprintf($this->getFilePattern(), $url, $project['path']));
+        }
     }
 
     public function getVirtualHosts()
@@ -50,7 +78,7 @@ class VirtualHosts
 
         $finder = $this->app['finder']
             ->files()
-            ->in($this->app['wampserver_dir'] . '/vhosts')
+            ->in($this->getDir())
             ->name('*.conf')
             ->depth('== 0')
         ;
@@ -84,5 +112,20 @@ class VirtualHosts
         }
 
         return $vhost;
+    }
+
+    protected function getFilePattern()
+    {
+        return <<<'EOT'
+<VirtualHost *:80>
+  ServerName %1$s
+  DocumentRoot %2$s
+  <Directory "%2$s">
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride all
+  </Directory>
+  %3$s
+</VirtualHost>
+EOT;
     }
 }

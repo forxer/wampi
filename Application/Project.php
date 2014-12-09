@@ -15,10 +15,8 @@ class Project
     protected $project = [
         'path' => null,
         'name' => null,
-        'vhost' => false,
         'vhost_file' => null,
         'vhost_url' => null,
-        'composer' => false,
         'composer_content' => null
     ];
 

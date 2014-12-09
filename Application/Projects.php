@@ -48,7 +48,7 @@ class Projects
 
                 $projects[$path] = [
                     'lower_name' => $lower_name,
-                    'first_letter' => $lower_name[0]
+                    'first_letter' => isset($lower_name[0]) ? $lower_name[0] : ''
                 ] + $project;
             }
 

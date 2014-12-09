@@ -26,7 +26,7 @@ class Project extends BaseController
 
         $this->setProject();
 
-        # if project not store in DB, store it now, immediatly
+        # if project is not store in DB, store it now, immediatly
         if (!$this->project['in_db']) {
             return $this->addProject();
         }
@@ -41,6 +41,8 @@ class Project extends BaseController
         $this->setProject();
 
         $this->project['name'] = $this->app['request']->request->get('name');
+        $this->project['vhost_url'] = $this->app['request']->request->get('vhost_url');
+        $this->project['vhost_file'] = $this->app['request']->request->get('vhost_file');
 
         $this->app['db']->update(
             'projects',

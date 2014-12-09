@@ -114,10 +114,8 @@ class Installation extends BaseController
         $projects = $newSchema->createTable('projects');
         $projects->addColumn('path',             'string',   ['notnull' => true, 'length' => 255]);
         $projects->addColumn('name',             'string',   ['notnull' => true, 'length' => 255]);
-        $projects->addColumn('vhost',            'boolean');
         $projects->addColumn('vhost_file',       'string',   ['notnull' => false, 'length' => 255]);
         $projects->addColumn('vhost_url',        'string',   ['notnull' => false, 'length' => 255]);
-        $projects->addColumn('composer',         'boolean',  ['notnull' => false]);
         $projects->addColumn('composer_content', 'text',     ['notnull' => false]);
         $projects->setPrimaryKey(['path']);
 

@@ -34,30 +34,30 @@ $view['breadcrumb']->add($project['name']);
                 <div role="tabpanel" class="tab-pane fade in active" id="tab-general">
                     <h2><?php echo $view['translator']->trans('project.tab.general.title') ?></h2>
                     <div class="form-group">
-                        <p><label for="project_name"><?php echo $view['translator']->trans('project.name') ?></label>
-                        <input type="text" id="project_name" name="project_name" class="form-control" maxlength="255" size="60" value="<?php echo $view->e($project['name']) ?>"></p>
+                        <p><label for="name"><?php echo $view['translator']->trans('project.name') ?></label>
+                        <input type="text" id="name" name="name" class="form-control" maxlength="255" size="60" value="<?php echo $view->e($project['name']) ?>"></p>
                     </div>
                     <div class="form-group">
-                        <p><label for="project_path"><?php echo $view['translator']->trans('project.path') ?></label>
-                        <input type="text" id="project_name" name="project_name" class="form-control" maxlength="255" size="60" readonly value="<?php echo $view->e($project['path']) ?>"></p>
+                        <p><label for="path"><?php echo $view['translator']->trans('project.path') ?></label>
+                        <input type="text" id="path" name="path" class="form-control" maxlength="255" size="60" readonly="readonly" value="<?php echo $view->e($project['path']) ?>"></p>
                     </div>
                 </div><!-- #tab-general -->
                 <div role="tabpanel" class="tab-pane fade" id="tab-vhost">
                     <h2><?php echo $view['translator']->trans('project.tab.vhost.title') ?></h2>
                     <div class="form-group">
-                        <p><label for="project_name"><?php echo $view['translator']->trans('project.vhost.url') ?></label>
-                        <?php echo $view['form']->text('project_name', 60, 255, 'foobar.local', 'form-control') ?></p>
+                        <p><label for="vhost_url"><?php echo $view['translator']->trans('project.vhost.url') ?></label>
+                        <input type="text" id="vhost_url" name="vhost_url" class="form-control" maxlength="255" size="60" value="<?php echo $view->e($project['vhost_url']) ?>"></p>
                     </div>
                     <div class="form-group">
-                        <p><label for="project_path"><?php echo $view['translator']->trans('project.vhost.path') ?></label>
-                        <?php echo $view['form']->text('project_path', 60, 255, 'c:\wamp\www\bar', 'form-control') ?></p>
+                        <p><label for="vhost_file"><?php echo $view['translator']->trans('project.vhost.file', ['%filename%' => $app['virtualhosts']->getDir()]) ?></label>
+                        <input type="text" id="vhost_file" name="vhost_file" class="form-control" maxlength="255" size="60" value="<?php echo $view->e($project['vhost_file']) ?>"></p>
                     </div>
                 </div><!-- #tab-vhost -->
                 <div role="tabpanel" class="tab-pane fade" id="tab-git">
                     <h2><?php echo $view['translator']->trans('project.tab.git.title') ?></h2>
                     <div class="form-group">
-                        <p><label for="project_path"><?php echo $view['translator']->trans('project.git.repository') ?></label>
-                        <?php echo $view['form']->text('project_path', 60, 255, 'http://github.com/forxer/wampi', 'form-control') ?></p>
+                        <p><label for="git_repository"><?php echo $view['translator']->trans('project.git.repository') ?></label>
+                        <?php echo $view['form']->text('git_repository', 60, 255, 'http://github.com/forxer/wampi', 'form-control') ?></p>
                     </div>
                 </div><!-- #tab-composer -->
                 <div role="tabpanel" class="tab-pane fade" id="tab-composer">

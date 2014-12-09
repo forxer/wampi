@@ -17,5 +17,10 @@ return [
     'project.tab.composer.title' => 'Composer',
 
     'project.name' => 'Project name',
-    'project.path' => 'Path of project directory'
+    'project.path' => 'Path of project directory',
+    'project.vhost.url' => 'URL',
+    'project.vhost.file' => 'Virtual Host filename in <code>%filename%</code>',
+
+    'project.added' => 'The project has been registered.',
+    'project.success' => 'The project has been successfully updated.'
 ];
