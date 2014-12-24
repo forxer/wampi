@@ -1,0 +1,34 @@
+{
+  "name": "Wampi",
+  "version": "2.0.0-beta.3",
+  "description": "Convenient replacement for the default index.php of Wampserver",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forxer/wampi.git"
+  },
+  "keywords": [
+    "php",
+    "tao",
+    "wampserver",
+    "index",
+    "localhost"
+  ],
+  "author": {
+    "name": "Vincent Garnier",
+    "email": "forxer@gmail.com",
+    "url": "http://forx.fr/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forxer/wampi/issues"
+  },
+  "homepage": "https://github.com/forxer/wampi",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-less": "^1.0.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
