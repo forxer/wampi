@@ -12,6 +12,10 @@
 /Application/Storage/Logs/**
 !/Application/Storage/Logs/.gitkeep
 
+# Production assets
+/Assets/prod/**
+!/Assets/prod/.gitkeep
+
 # Bower components
 /Components/**
 !/Components/.gitkeep
