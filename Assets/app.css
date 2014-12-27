@@ -6651,7 +6651,8 @@ button.close {
 .fa-meanpath:before {
   content: "\f20c";
 }
-;.select2-container {
+
+.select2-container {
     margin: 0;
     position: relative;
     display: inline-block;
@@ -7352,7 +7353,8 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
         background-position: 100% -21px !important;
     }
 }
-;.form-control .select2-choice {
+
+.form-control .select2-choice {
     border: 0;
     border-radius: 2px;
 }
@@ -7439,7 +7441,8 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
     border-left: 1px solid #468847 !important;
     background: #DFF0D8 !important;
 }
-;
+
+
 body {
     padding-top: 70px;
 }

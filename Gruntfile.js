@@ -37,6 +37,7 @@ module.exports = function(grunt) {
             },
             css: {
                 options: {
+                    separator: '\n',
                     banner: '<%= banner %>'
                 },
                 src: [
