@@ -41,7 +41,6 @@ module.exports = function(grunt) {
                 },
                 src: [
                     './Application/Assets/css/less.css',
-                    './bower_components/fontawesome/css/font-awesome.css',
                     './bower_components/select2/select2.css',
                     './bower_components/select2/select2-bootstrap.css',
                     './Application/Assets/css/main.css'

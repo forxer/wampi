@@ -22,7 +22,10 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
 
     <title><?php echo $view->escape($view['titleTag']->get(' - ')) ?></title>
 
-    <link rel="stylesheet" type="text/css" href="/min/g=css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $view['assets']->getUrl(
+        $app['debug'] ? 'app.css' : 'app.min.css',
+        'assets'
+    ) ?>">
 
     <!--[if lt IE 9]>
     <script src="<?php echo $view['assets']->getUrl('html5shiv/dist/html5shiv.min.js', 'components') ?>"></script>
@@ -104,7 +107,6 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
     <section id="content">
         <?php # Affichage du contenu principal de la page
         $view['slots']->output('_content') ?>
-
     </section><!-- #content -->
 
     <hr>
@@ -113,7 +115,10 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
         <p><small><?php echo sprintf($view['translator']->trans('Powered by wampi'), $app::URL, $app::VERSION) ?></small></p>
     </footer><!-- #main-footer -->
 
-    <script type="text/javascript" src="/min/g=js"></script>
+    <script type="text/javascript" src="<?php echo $view['assets']->getUrl(
+        $app['debug'] ? 'app.js' : 'app.min.js',
+        'assets'
+    ) ?>"></script>
 
     <?php $view['slots']->output('script') ?>
 

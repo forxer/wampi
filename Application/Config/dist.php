@@ -32,6 +32,25 @@ return [
     # Enable/disable debug mode
     'debug' => false,
 
+    # Relative path to the application URL from the hostname.
+    # The value should always begin and end with a slash.
+    #
+    # ex.:
+    # 	http://domain.tld 			: '/'
+    # 	http://domain.tld/app 		: '/app/'
+    # 	http://sub.domain.tld 		: '/'
+    # 	http://sub.domain.tld/test 	: '/test/'
+    # 	etc.
+    'app_url' => '/',
+
+    # Relative path to the assets URL
+    # from the app_url configuration (see above).
+    'assets_url' => 'Assets',
+
+    # Relative path to the components URL
+    # from the app_url configuration (see above).
+    'components_url' => 'bower_components',
+
     # Database connexion configuration.
     'db_host'       => 'localhost',
     'db_name'       => 'wampi',
