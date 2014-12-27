@@ -55,15 +55,15 @@ module.exports = function(grunt) {
                 banner: '<%= banner %>'
             },
             dist: {
-                src: './Assets/prod/app.js',
-                dest: './Assets/prod/app.min.js'
+                src: './Assets/app.js',
+                dest: './Assets/app.min.js'
             }
         },
 
         cssmin: {
             dist: {
-                src: './Assets/prod/app.css',
-                dest: './Assets/prod/app.min.css'
+                src: './Assets/app.css',
+                dest: './Assets/app.min.css'
             }
         }
     });
