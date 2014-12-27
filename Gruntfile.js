@@ -5,68 +5,65 @@ module.exports = function(grunt) {
 
         project: grunt.file.readJSON('package.json'),
 
-        projectBanner:
-            '/*!\n'
-            + ' * <%= project.name %> <%= project.version %>\n'
-            + ' * File generated on <%= grunt.template.today("yyyy-mm-dd") %>\n'
-            + ' */\n',
+        banner:
+            '/*!\n' +
+            ' * <%= project.name %> <%= project.version %>\n' +
+            ' * File generated on <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            ' */\n',
 
         less: {
             development: {
                 options: {
                   compress: false
                 },
-                files: {
-                  "./Assets/css/main.css": "./Assets/less/main.less"
-                }
+                src: './Application/Assets/less/main.less',
+                dest: './Application/Assets/css/less.css'
             }
         },
 
         concat: {
             options: {
                 separator: ';',
+                stripBanners: { block: true }
             },
             js: {
                 src: [
                     './Components/jquery/dist/jquery.js',
                     './Components/bootstrap/dist/js/bootstrap.js',
                     './Components/select2/select2.js',
-                    './Assets/js/main.js'
+                    './Application/Assets/js/main.js'
                 ],
-                dest: './Assets/prod/app.js',
+                dest: './Assets/app.js',
             },
             css: {
                 options: {
-                    banner: '<%= projectBanner%>'
+                    banner: '<%= banner %>'
                 },
                 src: [
-           //         './Components/bootstrap/dist/css/bootstrap.min.css',
-           //         './Components/bootstrap/dist/css/bootstrap-theme.min.css',
+                    './Application/Assets/css/less.css',
                     './Components/fontawesome/css/font-awesome.css',
                     './Components/select2/select2.css',
                     './Components/select2/select2-bootstrap.css',
-                    './Assets/css/main.css'
+                    './Application/Assets/css/main.css'
                 ],
-                dest: './Assets/prod/app.css'
+                dest: './Assets/app.css'
             }
         },
 
         uglify: {
             options: {
-                banner: '<%= projectBanner%>'
+                banner: '<%= banner %>'
             },
             dist: {
-                files: {
-                    './Assets/prod/app.js': './Assets/prod/app.js'
-                }
+                src: './Assets/prod/app.js',
+                dest: './Assets/prod/app.min.js'
             }
         },
 
         cssmin: {
             dist: {
-                files: {
-                    './Assets/prod/app.css': './Assets/prod/app.css'
-                }
+                src: './Assets/prod/app.css',
+                dest: './Assets/prod/app.min.css'
             }
         }
     });
@@ -78,6 +75,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Task definition
-    grunt.registerTask('default', ['less', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('assets', ['less', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('release', ['clean', 'assets', 'copy', 'archive']);
+    grunt.registerTask('default', ['assets']);
 
 };
