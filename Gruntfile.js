@@ -28,9 +28,9 @@ module.exports = function(grunt) {
             },
             js: {
                 src: [
-                    './Components/jquery/dist/jquery.js',
-                    './Components/bootstrap/dist/js/bootstrap.js',
-                    './Components/select2/select2.js',
+                    './bower_components/jquery/dist/jquery.js',
+                    './bower_components/bootstrap/dist/js/bootstrap.js',
+                    './bower_components/select2/select2.js',
                     './Application/Assets/js/main.js'
                 ],
                 dest: './Assets/app.js',
@@ -41,9 +41,9 @@ module.exports = function(grunt) {
                 },
                 src: [
                     './Application/Assets/css/less.css',
-                    './Components/fontawesome/css/font-awesome.css',
-                    './Components/select2/select2.css',
-                    './Components/select2/select2-bootstrap.css',
+                    './bower_components/fontawesome/css/font-awesome.css',
+                    './bower_components/select2/select2.css',
+                    './bower_components/select2/select2-bootstrap.css',
                     './Application/Assets/css/main.css'
                 ],
                 dest: './Assets/app.css'

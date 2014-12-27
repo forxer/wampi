@@ -13,8 +13,7 @@
 !/Application/Storage/Logs/.gitkeep
 
 # Bower components
-/Components/**
-!/Components/.gitkeep
+/bower_components/
 
 # Composer packages
 /vendor/
