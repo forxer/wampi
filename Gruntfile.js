@@ -23,10 +23,12 @@ module.exports = function(grunt) {
 
         concat: {
             options: {
-                separator: ';',
                 stripBanners: { block: true }
             },
             js: {
+                options: {
+                    separator: ';'
+                },
                 src: [
                     './bower_components/jquery/dist/jquery.js',
                     './bower_components/bootstrap/dist/js/bootstrap.js',
@@ -65,7 +67,17 @@ module.exports = function(grunt) {
                 src: './Assets/app.css',
                 dest: './Assets/app.min.css'
             }
-        }
+        },
+
+        watch: {
+            css: {
+                files: './Application/Assets/less/*.less',
+                tasks: ['less', 'concat'],
+        //		options: {
+        //			livereload: true,
+        //		},
+            },
+        },
     });
 
     // Plugin loading
@@ -73,6 +85,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Task definition
     grunt.registerTask('assets', ['less', 'concat', 'uglify', 'cssmin']);

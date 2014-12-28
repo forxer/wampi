@@ -1,6 +1,6 @@
 {
   "name": "Wampi",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-alpha.2",
   "description": "Convenient replacement for the default index.php of Wampserver",
   "main": "Gruntfile.js",
   "repository": {

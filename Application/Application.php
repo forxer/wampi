@@ -65,6 +65,7 @@ class Application extends TaoApplication
 
     public function getVersion()
     {
+
         return self::VERSION;
     }
 
