@@ -20,3 +20,6 @@
 
 # Nodes packages
 /node_modules/
+
+/Assets/*
+!/Assets/favicon
