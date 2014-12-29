@@ -21,5 +21,6 @@
 # Nodes packages
 /node_modules/
 
+# Various assets files
 /Assets/*
 !/Assets/favicon

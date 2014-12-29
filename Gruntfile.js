@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                   compress: false
                 },
                 src: './Application/Assets/less/main.less',
-                dest: './Application/Assets/css/less.css'
+                dest: './Assets/less.css'
             }
         },
 
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
                     banner: '<%= banner %>'
                 },
                 src: [
-                    './Application/Assets/css/less.css',
+                    './Assets/less.css',
                     './bower_components/select2/select2.css',
                     './bower_components/select2/select2-bootstrap.css',
                     './Application/Assets/css/main.css'
@@ -102,6 +102,6 @@ module.exports = function(grunt) {
     // Task definition
     grunt.registerTask('assets', ['less', 'concat', 'uglify', 'cssmin', 'copy:select2']);
     grunt.registerTask('release', ['clean', 'assets', 'copy', 'archive']);
-    grunt.registerTask('default', ['watch', 'assets']);
+    grunt.registerTask('default', ['assets', 'watch']);
 
 };
