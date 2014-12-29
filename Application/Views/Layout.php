@@ -112,7 +112,7 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
     <hr>
 
     <footer id="main-footer" class="container text-center">
-        <p><small><?php echo sprintf($view['translator']->trans('Powered by wampi'), $app::URL, $app::VERSION) ?></small></p>
+        <p><small><?php echo sprintf($view['translator']->trans('Powered by wampi'), $app->getHomepage(), $app->getVersion()) ?></small></p>
     </footer><!-- #main-footer -->
 
     <script type="text/javascript" src="<?php echo $view['assets']->getUrl(

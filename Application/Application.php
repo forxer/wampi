@@ -16,8 +16,7 @@ use Tao\Translator\TemplatingHelper;
 
 class Application extends TaoApplication
 {
-    const VERSION = '2.0.0.alpha.2';
-    const URL = 'https://github.com/forxer/wampi';
+    protected $package;
 
     public function __construct($loader, array $classMap = [])
     {
@@ -65,8 +64,33 @@ class Application extends TaoApplication
 
     public function getVersion()
     {
+        static $version = null;
 
-        return self::VERSION;
+        if (null === $version) {
+            $version = $this->getPackage()->version;
+        }
+
+        return $version;
+    }
+
+    public function getHomepage()
+    {
+        static $homepage = null;
+
+        if (null === $homepage) {
+            $homepage = $this->getPackage()->homepage;
+        }
+
+        return $homepage;
+    }
+
+    protected function getPackage()
+    {
+        if (null === $this->package) {
+            $this->package = json_decode(file_get_contents(__DIR__ . '/../package.json'));
+        }
+
+        return $this->package;
     }
 
     public function clearCache()
