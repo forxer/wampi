@@ -11,6 +11,17 @@ module.exports = function(grunt) {
             ' * File generated on <%= grunt.template.today("yyyy-mm-dd") %>\n' +
             ' */\n',
 
+
+        copy: {
+            select2: {
+                expand : true,
+                flatten: true,
+                cwd: './bower_components/select2',
+                src: '*.{png,jpg,jpeg,gif}',
+                dest: './Assets/'
+            }
+        },
+
         less: {
             development: {
                 options: {
@@ -73,14 +84,15 @@ module.exports = function(grunt) {
             css: {
                 files: './Application/Assets/less/*.less',
                 tasks: ['less', 'concat'],
-        //		options: {
-        //			livereload: true,
-        //		},
+                options: {
+                    livereload: true,
+                },
             },
         },
     });
 
     // Plugin loading
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -88,8 +100,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Task definition
-    grunt.registerTask('assets', ['less', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('assets', ['less', 'concat', 'uglify', 'cssmin', 'copy:select2']);
     grunt.registerTask('release', ['clean', 'assets', 'copy', 'archive']);
-    grunt.registerTask('default', ['assets']);
+    grunt.registerTask('default', ['watch', 'assets']);
 
 };
