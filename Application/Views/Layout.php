@@ -28,8 +28,9 @@ $view['breadcrumb']->add($app['app_name'], $view['router']->generate('projects')
     ) ?>">
 
     <!--[if lt IE 9]>
-    <script src="<?php echo $view['assets']->getUrl('html5shiv/dist/html5shiv.min.js', 'components') ?>"></script>
-    <script src="<?php echo $view['assets']->getUrl('respond/dest/respond.min.js', 'components') ?>"></script>
+    <script src="<?php echo $view['assets']->getUrl(
+        $app['debug'] ? 'ie.js' : 'ie.min.js',
+        'assets') ?>"></script>
     <![endif]-->
 
     <?php $view['slots']->output('head') ?>

@@ -24,3 +24,6 @@
 # Various assets files
 /Assets/*
 !/Assets/favicon
+
+# release buil dir
+/release/
