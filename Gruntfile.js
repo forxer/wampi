@@ -181,6 +181,12 @@ module.exports = function(grunt) {
         //        },
             },
         },
+
+        zip: {
+            cwd: 'release/tmp/',
+            src: '**/*',
+            dest: 'release/<%= project.version %>.zip'
+        }
     });
 
 
@@ -195,6 +201,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-zip');
 
 
     /* 3. Définition des tâches Grunt
@@ -229,7 +236,7 @@ module.exports = function(grunt) {
         'assets',
         'clean',
         'copy:release',
- //       'archive'
+        'zip'
     ]);
 
 };
