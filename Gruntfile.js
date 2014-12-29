@@ -86,7 +86,7 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            css: {
+            assets: {
                 files: './Application/Assets/**/*',
                 tasks: ['assets'],
                 options: {
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
     grunt.registerTask('assets:css', ['less', 'concat:css', 'autoprefixer', 'cssmin']);
     grunt.registerTask('assets', ['assets:js', 'assets:css', 'copy:select2']);
 
-    grunt.registerTask('release', ['clean', 'assets', 'copy', 'archive']);
+    grunt.registerTask('release', ['assets', 'clean', 'copy', 'archive']);
 
     grunt.registerTask('default', ['assets', 'watch']);
 
