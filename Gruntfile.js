@@ -23,7 +23,7 @@ module.exports = function(grunt) {
         },
 
         less: {
-            development: {
+            dist: {
                 options: {
                   compress: false
                 },
@@ -33,12 +33,10 @@ module.exports = function(grunt) {
         },
 
         concat: {
-            options: {
-                stripBanners: { block: true }
-            },
             js: {
                 options: {
-                    separator: ';'
+                    separator: ';',
+                    stripBanners: { block: true }
                 },
                 src: [
                     './bower_components/jquery/dist/jquery.js',
@@ -51,6 +49,7 @@ module.exports = function(grunt) {
             css: {
                 options: {
                     separator: '\n',
+                    stripBanners: { block: true },
                     banner: '<%= banner %>'
                 },
                 src: [
@@ -73,6 +72,12 @@ module.exports = function(grunt) {
             }
         },
 
+        autoprefixer: {
+            dist: {
+                src: './Assets/app.css'
+            }
+        },
+
         cssmin: {
             dist: {
                 src: './Assets/app.css',
@@ -82,8 +87,8 @@ module.exports = function(grunt) {
 
         watch: {
             css: {
-                files: './Application/Assets/less/*.less',
-                tasks: ['less', 'concat'],
+                files: './Application/Assets/**/*',
+                tasks: ['assets'],
                 options: {
                     livereload: true,
                 },
@@ -98,10 +103,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     // Task definition
-    grunt.registerTask('assets', ['less', 'concat', 'uglify', 'cssmin', 'copy:select2']);
+    grunt.registerTask('assets:js', ['concat:js', 'uglify']);
+    grunt.registerTask('assets:css', ['less', 'concat:css', 'autoprefixer', 'cssmin']);
+    grunt.registerTask('assets', ['assets:js', 'assets:css', 'copy:select2']);
+
     grunt.registerTask('release', ['clean', 'assets', 'copy', 'archive']);
+
     grunt.registerTask('default', ['assets', 'watch']);
 
 };
