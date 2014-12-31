@@ -6,6 +6,30 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 
+        src: {
+            js: [
+                 'bower_components/jquery/dist/jquery.js',
+                 'bower_components/bootstrap/dist/js/bootstrap.js',
+                 'bower_components/mixitup/src/jquery.mixitup.js',
+                 'bower_components/select2/select2.js',
+                 'Application/Assets/js/main.js'
+            ],
+
+            ie_js: [
+                'bower_components/html5shiv/dist/html5shiv.min.js',
+                'bower_components/respond/dest/respond.min.js'
+            ],
+
+            less: 'Application/Assets/less/main.less',
+
+            css: [
+                'Assets/less.css',
+                'bower_components/select2/select2.css',
+                'bower_components/select2/select2-bootstrap.css',
+                'Application/Assets/css/main.css'
+            ],
+        },
+
         // Lecture des données du fichier package.json
         project: grunt.file.readJSON('package.json'),
 
@@ -35,8 +59,15 @@ module.exports = function(grunt) {
                 expand : true,
                 src: [
                     '**/*',
+                    '.htaccess',
                     '!release/**',
-                    '!node_modules/**'
+                    '!node_modules/**',
+                    '!bower_components/**',
+                    '!bower.json',
+                    '!composer.*',
+                    '!Gruntfile.js',
+                    '!Application/Config/config.php',
+                    '!Application/Config/installed',
                 ],
                 dest: 'release/tmp/'
             }
@@ -69,15 +100,13 @@ module.exports = function(grunt) {
          * LESS compilation
          */
         less: {
-
             dist: {
                 options: {
                   compress: false
                 },
-                src: 'Application/Assets/less/main.less',
+                src: '<%= src.less %>',
                 dest: 'Assets/less.css'
             }
-
         },
 
         /*
@@ -91,21 +120,13 @@ module.exports = function(grunt) {
                     separator: ';',
                     stripBanners: { block: true }
                 },
-                src: [
-                    'bower_components/jquery/dist/jquery.js',
-                    'bower_components/bootstrap/dist/js/bootstrap.js',
-                    'bower_components/select2/select2.js',
-                    'Application/Assets/js/main.js'
-                ],
+                src: '<%= src.js %>',
                 dest: 'Assets/app.js',
             },
 
             // Concaténation des fichiers JS pour IE < 9
             ie_js: {
-                src: [
-                    'bower_components/html5shiv/dist/html5shiv.min.js',
-                    'bower_components/respond/dest/respond.min.js'
-                ],
+                src: '<%= src.ie_js %>',
                 dest: 'Assets/ie.js',
             },
 
@@ -116,12 +137,7 @@ module.exports = function(grunt) {
                     stripBanners: { block: true },
                     banner: '<%= banner %>'
                 },
-                src: [
-                    'Assets/less.css',
-                    'bower_components/select2/select2.css',
-                    'bower_components/select2/select2-bootstrap.css',
-                    'Application/Assets/css/main.css'
-                ],
+                src: '<%= src.css %>',
                 dest: 'Assets/app.css'
             }
         },
@@ -173,19 +189,26 @@ module.exports = function(grunt) {
          * Surveillance...
          */
         watch: {
-            assets: {
-                files: 'Application/Assets/**/*',
-                tasks: ['assets'],
-        //        options: {
-        //            livereload: true,
-        //        },
+            js: {
+                files: '<%= src.js %>',
+                tasks: ['assets:js']
             },
+            css: {
+                files: ['<%= src.less %>', '<%= src.css %>', '!Assets/less.css'],
+                tasks: ['assets:css']
+            }
         },
 
+        /*
+         * Archive zip
+         */
         zip: {
-            cwd: 'release/tmp/',
-            src: '**/*',
-            dest: 'release/<%= project.version %>.zip'
+            release: {
+                cwd: 'release/tmp',
+                dot: true,
+                src: 'release/tmp/**/*',
+                dest: 'release/<%= project.name.toLowerCase() %>-<%= project.version %>.zip'
+            }
         }
     });
 
@@ -233,7 +256,6 @@ module.exports = function(grunt) {
 
     // Tâche utilisée pour la release d'une nouvelle version (pléonasme ? probably...)
     grunt.registerTask('release', [
-        'assets',
         'clean',
         'copy:release',
         'zip'

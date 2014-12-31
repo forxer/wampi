@@ -7,7 +7,7 @@ To get the diff between two versions, go to https://github.com/forxer/wampi/comp
 
 - 2.0.0-alpha.2
     - can now check for developpement releases
-    - use grunt
+    - use Grunt
     - remove minify
 - 2.0.0-alpha.1
     - latest release checker
