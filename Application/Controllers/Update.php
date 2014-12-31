@@ -47,7 +47,7 @@ class Update extends Installation
 
         $this->app['configuration']->save($validated);
 
-        return $this->redirectToRoute('configuration');
+        return $this->redirect($this->generateUrl('configuration') . '?tab=version');
     }
 
     public function download()

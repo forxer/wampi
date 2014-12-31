@@ -57,7 +57,7 @@ $view['breadcrumb']->add($project['name']);
                     <h2><?php echo $view['translator']->trans('project.tab.git.title') ?></h2>
                     <div class="form-group">
                         <p><label for="git_repository"><?php echo $view['translator']->trans('project.git.repository') ?></label>
-                        <?php echo $view['form']->text('git_repository', 60, 255, 'http://github.com/forxer/wampi', 'form-control') ?></p>
+                        <?php echo $view['form']->text('git_repository', 60, 255, 'http://github.com/Tao-php/wampi', 'form-control') ?></p>
                     </div>
                 </div><!-- #tab-composer -->
                 <div role="tabpanel" class="tab-pane fade" id="tab-composer">

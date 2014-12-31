@@ -30,32 +30,43 @@ class Configuration extends BaseController
 
         $latestRelease = $this->getLatestRelease($this->app['pre_releases_update']);
 
-        /*
-        $panels = new \ArrayObject([
-            'general' => [
-                'title' => $this->app['translator']->trans('config.tab.general'),
-                'content' => $this->renderView('Configuration/general')
-            ],
-            'paths' => [
-                'title' => $this->app['translator']->trans('config.tab.paths'),
-                'content' => $this->renderView('Configuration/paths')
-            ],
-            'database' => [
-                'title' => $this->app['translator']->trans('config.tab.db'),
-                'content' => $this->renderView('Configuration/database')
-            ],
-            'version' => [
-                'title' => $this->app['translator']->trans('config.tab.version'),
-                'content' => $this->renderView('Configuration/version')
-            ]
-        ]);
-        */
+        $uptodate = version_compare($this->app->getVersion(), $latestRelease['tag_name'], '>=');
 
-        return $this->render('Configuration', [
+        $activePanel = $this->app['request']->query->get('tab', 'general');
+
+        $tplData = [
             'config' => $this->config,
             'latestRelease' => $latestRelease,
-            'uptodate' => version_compare($this->app->getVersion(), $latestRelease['tag_name'], '>=')
+            'uptodate' => $uptodate,
+            'activePanel' => $activePanel
+        ];
+
+        $panels = new \ArrayObject([
+            10 => [
+                'id' => 'general',
+                'title' => $this->app['translator']->trans('config.tab.general'),
+                'content' => $this->renderView('Configuration/general', $tplData)
+            ],
+            20 => [
+                'id' => 'paths',
+                'title' => $this->app['translator']->trans('config.tab.paths'),
+                'content' => $this->renderView('Configuration/paths', $tplData)
+            ],
+            30 => [
+                'id' => 'database',
+                'title' => $this->app['translator']->trans('config.tab.db'),
+                'content' => $this->renderView('Configuration/database', $tplData)
+            ],
+            40 => [
+                'id' => 'version',
+                'title' => ($uptodate ? '<i class="fa fa-check text-success"></i> ' : '<i class="fa fa-exclamation-triangle text-danger"></i> ') . $this->app['translator']->trans('config.tab.version'),
+                'content' => $this->renderView('Configuration/version', $tplData)
+            ]
         ]);
+
+        $tplData['panels'] = $panels;
+
+        return $this->render('Configuration', $tplData);
     }
 
     public function process()
@@ -104,7 +115,7 @@ class Configuration extends BaseController
             new GithubCache(['cache_dir' => $this->app->utilities->getApplicationPath() . '/Storage/Cache/Github'])
         );
 
-        $releases = $client->api('repo')->releases()->all('forxer', 'wampi');
+        $releases = $client->api('repo')->releases()->all('Tao-php', 'wampi');
 
         if (!$bPreReleases)
         {
