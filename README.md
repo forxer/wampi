@@ -25,6 +25,32 @@ So you can now create a new virtualhost by making a new file `c:/wamp/vhosts/wam
 </VirtualHost>
 ```
 
-Next, download the lastest release of Wampi and put it in `c:\wamp\www\wampi`.
+Next, download the [lastest release of Wampi](https://github.com/forxer/wampi/releases/latest) and put it in `c:\wamp\www\wampi`.
 
 You can now browse to http://wampi.local to use your new localhost homepage for wampserver.
+
+
+Developpment
+------------
+
+Clone the project.
+
+Install PHP dependancies with:
+```
+composer install
+```
+
+Install assets dependancies with:
+```
+bower install
+```
+
+Install node module to use Grunt:
+```
+npm install
+```
+
+Run Grunt:
+```
+grunt
+```
