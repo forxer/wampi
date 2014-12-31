@@ -11,8 +11,7 @@ $view->extend('Layout');
 ?>
 
 <?php $view['slots']->start('script') ?>
-<script type="text/javascript" src="<?php echo $view['assets']->getUrl('mixitup/build/jquery.mixitup.min.js', 'components') ?>"></script>
-<script type="text/javascript" src="<?php echo $view['assets']->getUrl('select2/select2_locale_' . $app['session']->getLanguage() . '.js', 'components') ?>"></script>
+<script type="text/javascript" src="<?php echo $view['assets']->getUrl('select2/select2_locale_' . $app['session']->getLanguage() . '.js', 'assets') ?>"></script>
 <script type="text/javascript">
 
 $('.visit-project').tooltip();

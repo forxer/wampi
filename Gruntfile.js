@@ -45,13 +45,22 @@ module.exports = function(grunt) {
          */
         copy: {
 
-            // Copie des fichiers de jQuery Select2
-            select2: {
+            // Copie des images de jQuery Select2
+            select2_img: {
                 expand : true,
                 flatten: true,
                 cwd: 'bower_components/select2',
                 src: '*.{png,jpg,jpeg,gif}',
                 dest: 'Assets/'
+            },
+
+            // Copie des locales de jQuery Select2
+            select2_locales: {
+                expand : true,
+                flatten: true,
+                cwd: 'bower_components/select2',
+                src: 'select2_locale_*.js',
+                dest: 'Assets/select2/'
             },
 
             // Copie des fichiers d'une release
@@ -253,6 +262,12 @@ module.exports = function(grunt) {
             'autoprefixer',
             'cssmin'
         ]);
+        grunt.registerTask('copy:select2', [
+            'copy:select2_img',
+            'copy:select2_locales'
+        ]);
+
+
 
     // Tâche utilisée pour la release d'une nouvelle version (pléonasme ? probably...)
     grunt.registerTask('release', [
