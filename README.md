@@ -1,7 +1,7 @@
 wampi
 ===============
 
-Convenient replacement for the default Wampserver index.
+Convenient replacement for the default Wampserver index built on top of Tao.
 
 Installation
 ------------
