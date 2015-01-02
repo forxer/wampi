@@ -5,6 +5,8 @@ This changelog does not reference all the changes, only the most relevant to be 
 To get the diff for a specific change, go to https://github.com/Tao-php/wampi/commit/XXX where XXX is the change hash
 To get the diff between two versions, go to https://github.com/Tao-php/wampi/compare/1.0...1.0.1
 
+- 2.0.0-alpha.3
+    - move project under Tao-php Github organization
 - 2.0.0-alpha.2
     - can now check for developpement releases
     - use Grunt
