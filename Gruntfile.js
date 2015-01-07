@@ -28,6 +28,10 @@ module.exports = function(grunt) {
                 'bower_components/select2/select2-bootstrap.css',
                 'Application/Assets/css/main.css'
             ],
+
+            fonts: [
+                'bower_components/fontawesome/fonts/*'
+            ],
         },
 
         // Lecture des données du fichier package.json
@@ -61,6 +65,13 @@ module.exports = function(grunt) {
                 cwd: 'bower_components/select2',
                 src: 'select2_locale_*.js',
                 dest: 'Assets/select2/'
+            },
+
+            fonts: {
+                expand : true,
+                flatten: true,
+                src: '<%= src.fonts %>',
+                dest: 'Assets/fonts/'
             },
 
             // Copie des fichiers d'une release
@@ -260,7 +271,8 @@ module.exports = function(grunt) {
             'less',
             'concat:css',
             'autoprefixer',
-            'cssmin'
+            'cssmin',
+            'copy:fonts'
         ]);
         grunt.registerTask('copy:select2', [
             'copy:select2_img',
