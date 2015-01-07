@@ -7,6 +7,7 @@ To get the diff between two versions, go to https://github.com/Tao-php/wampi/com
 
 - 2.0.0-alpha.3
     - move project under Tao-php Github organization
+    - fix font-awesome fonts path
 - 2.0.0-alpha.2
     - can now check for developpement releases
     - use Grunt
